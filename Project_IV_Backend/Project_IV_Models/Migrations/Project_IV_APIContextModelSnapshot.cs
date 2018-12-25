@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Project_IV_API.Models;
+using Project_IV_Models;
 
-namespace Project_IV_API.Migrations
+namespace Project_IV_Models.Migrations
 {
     [DbContext(typeof(Project_IV_APIContext))]
     partial class Project_IV_APIContextModelSnapshot : ModelSnapshot

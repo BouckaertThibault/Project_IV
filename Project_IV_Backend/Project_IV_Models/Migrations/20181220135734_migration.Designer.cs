@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Project_IV_API.Models;
+using Project_IV_Models;
 
-namespace Project_IV_API.Migrations
+namespace Project_IV_Models.Migrations
 {
     [DbContext(typeof(Project_IV_APIContext))]
-    [Migration("20181219142058_migration")]
+    [Migration("20181220135734_migration")]
     partial class migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Project_IV_Models.Models;
 
-namespace Project_IV_API.Models
+namespace Project_IV_Models
 {
     public class Project_IV_APIContext : IdentityDbContext<User>
     {

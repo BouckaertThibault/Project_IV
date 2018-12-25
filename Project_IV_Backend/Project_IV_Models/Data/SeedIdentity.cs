@@ -20,8 +20,8 @@ namespace Project_IV_Models
 
         public async Task SeedIdentityProject_IV_API()
         {
-            var user = await _userManager.FindByNameAsync("ArneD");
-            var user2 = await _userManager.FindByNameAsync("ThibaultB");
+            var user = await _userManager.FindByNameAsync("Thibault");
+
 
             if (user == null)
             {
@@ -33,11 +33,11 @@ namespace Project_IV_Models
 
                 user = new User()
                 {
-                    UserName = "ArneD",
-                    Email = "arne.debouvere@student.howest.be",
+                    UserName = "Thibault",
+                    Email = "thibault.bouckaert@student.howest.be",
                 };
 
-                var userResult = await _userManager.CreateAsync(user, "Howest123@");
+                var userResult = await _userManager.CreateAsync(user, "Project4@");
                 var roleResult = await _userManager.AddToRoleAsync(user, "Admin");
 
                 if (!userResult.Succeeded || !roleResult.Succeeded)
@@ -46,28 +46,7 @@ namespace Project_IV_Models
                 }
             }
 
-            if (user2 == null)
-            {
-                if (!(await _roleManager.RoleExistsAsync("Admin")))
-                {
-                    var role = new IdentityRole("Admin");
-                    await _roleManager.CreateAsync(role);
-                }
 
-                user2 = new User()
-                {
-                    UserName = "ThibaultB",
-                    Email = "thibault.bouckaert@student.howest.be",
-                };
-
-                var userResult = await _userManager.CreateAsync(user2, "Howest456@");
-                var roleResult = await _userManager.AddToRoleAsync(user2, "Admin");
-
-                if (!userResult.Succeeded || !roleResult.Succeeded)
-                {
-                    throw new InvalidOperationException("Failed to build user and roles.");
-                }
-            }
         }
     }
 }

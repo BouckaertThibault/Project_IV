@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Project_IV_API.Migrations
+namespace Project_IV_Models.Migrations
 {
     public partial class migration : Migration
     {

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project_IV_API.Models;
+using Project_IV_Models;
 using Project_IV_Models.Models;
 
 namespace Project_IV_API.Controllers
