@@ -2,9 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using Project_IV_API.Models;
-using Project_IV_Models.Models;
-using Project_IV_Models.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -12,6 +9,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Project_IV_API.Models;
 
 namespace Project_IV_API.Services
 {
@@ -69,7 +67,6 @@ namespace Project_IV_API.Services
                 //JWT claims zijn ingebouwd in de JWT spec: subscriber, JWT Id
                  new Claim(JwtRegisteredClaimNames.Sub, identityModel.UserName),  //subscriber
                  new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-               
              }.Union(userClaims);   //nog de extra userClaims toevoegen.
 
                 //3. Sigin credentials met de symmetric key & encryptie methode
