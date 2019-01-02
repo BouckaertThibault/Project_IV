@@ -92,7 +92,7 @@ namespace Project_IV_Backend
 
             // Repositories
             services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
-            services.AddScoped<IUserRepo, UserRepo>();
+            
 
             // Auto mapper
             services.AddAutoMapper();

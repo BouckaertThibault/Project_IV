@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project_IV_Models;
 
 namespace Project_IV_Models.Migrations
 {
     [DbContext(typeof(Project_IV_APIContext))]
-    partial class Project_IV_APIContextModelSnapshot : ModelSnapshot
+    [Migration("20190102123124_migration")]
+    partial class migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

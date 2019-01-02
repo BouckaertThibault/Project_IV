@@ -10,19 +10,7 @@ namespace Project_IV_Models.Models
         
         
 
-        private ICollection<LocationsUsers> _locationsUsers;
-        public virtual ICollection<LocationsUsers> LocationsUsers
-        {
-            get
-            {
-                return _locationsUsers ?? (_locationsUsers = new List<LocationsUsers>());
-            }
-            set
-            {
-                _locationsUsers = value;
-            }
-        }
-
+        
 
     }
 }

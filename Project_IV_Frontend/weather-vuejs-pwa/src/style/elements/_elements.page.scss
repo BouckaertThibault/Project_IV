@@ -1,0 +1,22 @@
+body,
+html {
+    font-family: $primary-font;
+	font-size: $primary-font-size;
+	line-height: 1.2rem;
+
+	background: $white;
+}
+
+::selection {
+	color: $ultra-light-grey;
+	background: $dark-grey;
+}
+
+// #app{
+// 	width: 100%;
+//     height: 100vh;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     overflow: hidden;
+// }

@@ -15,17 +15,13 @@ namespace Project_IV_Models
         {
         }
 
-        // ORM = Object Relational Mapping met de database
-        public DbSet<Location> Location { get; set; }
-        public DbSet<LocationsUsers> LocationsUsers { get; set; }
+        
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<LocationsUsers>().ToTable("LocationsUsers");
-            modelBuilder.Entity<Location>().ToTable("Location");
-            modelBuilder.Entity<LocationsUsers>().HasKey(pa => new { pa.LocationID, pa.UserID });
+            
             //modelBuilder.Seed();
         }
 
