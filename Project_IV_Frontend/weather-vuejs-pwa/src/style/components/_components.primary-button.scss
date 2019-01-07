@@ -1,16 +1,16 @@
 @import  '../settings/_settings.global';
 
 .c-button{
-
+    -webkit-appearance: none;
 }
 
 .c-primary-button{
     background-color: #4CD964;
     border: none;
-    border-radius: 20px;
-    width: 120px;
-    height: 40px;
-    font-size: 13px;
+    border-radius: 30px;
+    width: 100%;
+    height: 55px;
+    font-size: 16px;
     font-weight: bold; 
     color: $white;
 }

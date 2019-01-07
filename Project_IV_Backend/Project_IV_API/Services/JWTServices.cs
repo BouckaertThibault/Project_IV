@@ -96,5 +96,6 @@ namespace Project_IV_API.Services
             }
             return new { error = "Failed to generate JWT token" }; //minimale info ->meer in de logger
         }
+
     }
 }

@@ -3,7 +3,7 @@
 }
 
 .splash-img {
-    max-width: 50%;
+    max-width: 60%;
     height: auto;
     margin-left: auto;
     margin-right: auto;
@@ -14,13 +14,16 @@
 
 .splash-container-buttons{
     margin-bottom: 50px;
+    width: 90vw;
+}
+
+.splash-button-signup > button {
+    background-color: #006FFF !important;
 }
 
 .splash-container-buttons > *{
     margin-bottom: 10px;
 }
 
-.splash-container-buttons > div > button{
-    width: 70vw !important;
-}
+
 

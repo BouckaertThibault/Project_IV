@@ -1,0 +1,11 @@
+/*
+    APP BASE
+    Base.scss imports the basic styles for our app. Other styles are included in the Vue components itself. (The first 4 triangle levels from the ITCSS pattern.)
+*/
+
+// SETTINGS
+@import 'settings/settings.global';
+
+
+@import '../app';
+

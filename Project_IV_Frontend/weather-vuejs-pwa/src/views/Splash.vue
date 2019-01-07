@@ -4,8 +4,8 @@
           <img src="@/assets/Weather-logo.png" alt="Logo" class="splash-img">
       </div>
       <div class="splash-container-buttons">
-          <primary-button>Sign in</primary-button>
-          <primary-button>Sign up</primary-button>
+          <primary-button @click.native="onSignin">Sign in</primary-button>
+          <primary-button @click.native="onSignup" class="splash-button-signup" >Sign up</primary-button>
       </div>
   </div>
 </template>
@@ -18,6 +18,16 @@
     name: 'splash',
     components: {
       PrimaryButton
+    },
+    methods:{
+      onSignin: function() {
+        this.$router.push('/signin'); 
+        console.log("button pushed");
+      },
+      onSignup: function() {
+        this.$router.push('/signup'); 
+        console.log("button pushed");
+      }
     }
     
   }

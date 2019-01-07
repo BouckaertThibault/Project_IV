@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Project_IV_API.Models;
-using Project_IV_API.Models.DTOs;
 using Project_IV_API.Services;
 using Project_IV_Models;
 using Project_IV_Models.Models;
@@ -24,20 +23,24 @@ namespace Project_IV_API.Controllers
     {
         private Project_IV_APIContext _context;
         private readonly IConfiguration _configuration;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<User> _usermanager;
         private readonly IPasswordHasher<User> _passwordHasher;
         private ILogger<AuthController> _logger;
         private SignInManager<User> _signInManager;
+        private readonly IMapper _mapper;
 
         public AuthController(Project_IV_APIContext context, SignInManager<User> signInMgr, ILogger<AuthController> logger,
-            IConfiguration configuration, UserManager<User> usermanager, IPasswordHasher<User> passwordHasher)
+            IConfiguration configuration, UserManager<User> usermanager, IPasswordHasher<User> passwordHasher, RoleManager<IdentityRole> roleManager, IMapper mapper)
         {
             _signInManager = signInMgr;
             _context = context;
             _usermanager = usermanager;
             _passwordHasher = passwordHasher;
             _configuration = configuration;
+            _roleManager = roleManager;
             _logger = logger;
+            _mapper = mapper;
         }
 
 
@@ -93,6 +96,131 @@ namespace Project_IV_API.Controllers
             return BadRequest("Failed to generate JWT token");
         }
 
+
+        [HttpPost("register")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Register([FromBody] RegisterModel registerModel)
+        {
+            if (registerModel == null)
+                return BadRequest((IdentityResult.Failed(new IdentityError
+                {
+                    Code = "Empty",
+                    Description = "Please fill in all required fields"
+                })));
+
+
+            if (!ModelState.IsValid)
+                return BadRequest((IdentityResult.Failed(new IdentityError
+                {
+                    Code = "InvalidOrCompleteData",
+                    Description = "The data you entered is incomplete or not valid"
+                })));
+
+            if (string.Equals(registerModel.UserName, registerModel.Password, StringComparison.OrdinalIgnoreCase))
+            {
+                return BadRequest((IdentityResult.Failed(new IdentityError
+                {
+                    Code = "UsernameAsPassword",
+                    Description = "You can not use your username as password"
+                })));
+            }
+
+            var user = await _usermanager.FindByNameAsync(registerModel.UserName);
+
+            // Might pose a security issue, balancing between usabiliity and security
+            // Choice was made to leave this as is because you can query for player names 
+            // and statistics anyway
+            if (user != null)
+            {
+                return StatusCode(409, (IdentityResult.Failed(new IdentityError
+                {
+                    Code = "UsernameTaken",
+                    Description = "Username is already in use"
+                })));
+            }
+
+            user = await _usermanager.FindByEmailAsync(registerModel.Email);
+
+            if (user != null)
+            {
+                return StatusCode(409, (IdentityResult.Failed(new IdentityError
+                {
+                    Code = "EmailTaken",
+                    Description = "Email is already in use"
+                })));
+            }
+
+            if (String.IsNullOrWhiteSpace(registerModel.Password))
+            {
+                return BadRequest((IdentityResult.Failed(new IdentityError
+                {
+                    Code = "BadPassword",
+                    Description = "Password cannot be empty"
+                })));
+            }
+
+            if (registerModel.Password.Length < 8)
+            {
+                return BadRequest((IdentityResult.Failed(new IdentityError
+                {
+                    Code = "ShortPassword",
+                    Description = "Password needs to be at least 8 characters"
+                })));
+            }
+
+            if (!registerModel.Password.Any(char.IsUpper))
+            {
+                return BadRequest((IdentityResult.Failed(new IdentityError
+                {
+                    Code = "PasswordValidateUppercase",
+                    Description = "Password needs to have uppercase characters"
+                })));
+            }
+
+            if (!registerModel.Password.Any(char.IsLower))
+            {
+                return BadRequest((IdentityResult.Failed(new IdentityError
+                {
+                    Code = "PasswordValidateLowercase",
+                    Description = "Password needs to have lowercase characters"
+                })));
+            }
+
+            if (!registerModel.Password.Any(char.IsDigit))
+            {
+                return BadRequest((IdentityResult.Failed(new IdentityError
+                {
+                    Code = "PasswordValidateNumerical",
+                    Description = "Password needs to contain numbers"
+                })));
+            }
+
+            if (user == null)
+            {
+                if (!(await _roleManager.RoleExistsAsync("Player")))
+                {
+                    var role = new IdentityRole("Player");
+                    await _roleManager.CreateAsync(role);
+                }
+
+                user = new User()
+                {
+                    UserName = registerModel.UserName,
+                    Email = registerModel.Email
+                };
+
+                var userResult = await _usermanager.CreateAsync(user, registerModel.Password);
+                var roleResult = await _usermanager.AddToRoleAsync(user, "Admin");
+
+                if (!userResult.Succeeded || !roleResult.Succeeded)
+                {
+                    _logger.LogError($"Failed to build user and roles.");
+                    throw new InvalidOperationException("Failed to build user and roles.");
+                }
+            }
+            var userModel = _mapper.Map<UserModel>(user);
+            return Ok(userModel);
+        }
 
     }
 }

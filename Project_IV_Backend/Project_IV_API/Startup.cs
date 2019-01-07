@@ -97,6 +97,18 @@ namespace Project_IV_Backend
             // Auto mapper
             services.AddAutoMapper();
 
+            // CORS
+            services.AddCors(cfg =>
+            {
+                cfg.AddPolicy("projectPolicy", builder =>
+                {
+                    builder
+                     .AllowAnyMethod()
+                     .AllowAnyHeader()
+                     .WithOrigins("http://localhost:8080")
+                     .AllowCredentials();
+                });
+            });
 
             // MVC
             services.AddMvc(options =>
@@ -135,6 +147,7 @@ namespace Project_IV_Backend
                 app.UseHsts();
             }
 
+            app.UseCors("projectPolicy");
             app.UseRewriter(new RewriteOptions().AddRedirectToHttps(301, 44343));
             app.UseAuthentication();
             app.UseHttpsRedirection();

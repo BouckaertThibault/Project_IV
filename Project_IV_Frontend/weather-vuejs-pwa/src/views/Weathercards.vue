@@ -40,7 +40,7 @@
   }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
   @import './src/style/base';
   @import './src/style/components/components.container';
 </style>

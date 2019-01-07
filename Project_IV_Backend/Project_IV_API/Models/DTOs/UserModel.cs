@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Project_IV_API.Models.DTOs
+namespace Project_IV_API
 {
-    public class Usermodel
+    public class UserModel
     {
     }
 }

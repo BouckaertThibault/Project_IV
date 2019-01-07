@@ -1,0 +1,27 @@
+@import '../settings/settings.global';
+
+.c-form{
+	display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    width: 90vw;
+}
+
+.c-form-input {
+	font-family: "Roboto", sans-serif;
+	outline: 0;
+	background: white;
+	width: 100%;
+	border: 0;
+	margin: 0 0 15px;
+	padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid #DEDEDE;
+	font-size: 14px;
+	border-radius: 25px;
+}
+
+.c-form-label{
+    margin-bottom: 15px;
+}
+
