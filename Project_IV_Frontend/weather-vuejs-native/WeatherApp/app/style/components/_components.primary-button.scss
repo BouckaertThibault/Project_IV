@@ -2,12 +2,11 @@
 
 
 .c-primary-button{
-    background-color: #4CD964;
-    border: none;
-    border-radius: 20px;
-    width: 120px;
-    height: 10%;
-    font-size: 13px;
-    font-weight: bold; 
-    color: $white;
+    font-size: 12;
+    font-weight: bold;
+    text-transform: none;
+}
+
+.c-button-spacer{
+    margin-bottom: 15;
 }

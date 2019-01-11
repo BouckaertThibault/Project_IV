@@ -16,4 +16,7 @@ tns debug <platform> --bundle
 
 # Build, watch for changes and run the application
 tns run <platform> --bundle
+
+# op samsung s8 runnen
+tns run --device ce051715096d20fe0c --bundle
 ```

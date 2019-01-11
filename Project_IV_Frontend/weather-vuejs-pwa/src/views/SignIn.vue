@@ -16,7 +16,6 @@
 <script>
  import PrimaryButton from '@/components/forms/PrimaryButton';
 
-
   export default {
     name: 'signin',
     data(){

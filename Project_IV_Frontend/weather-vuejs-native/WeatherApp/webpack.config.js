@@ -109,6 +109,7 @@ module.exports = env => {
             "timers": false,
             "setImmediate": false,
             "fs": "empty",
+            "net": 'empty',
             "__dirname": false,
         },
         devtool: "none",
