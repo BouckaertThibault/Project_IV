@@ -5,48 +5,92 @@
 }
 
 .c-weather-card{
-    background-color: #13a1e2;
-    width: 328px;
     height: 200px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    background-color: #3aa8fc;
+    font-weight: bold;
+    color: white;
+}
+
+.c-weather-card:last-child{
+    margin-bottom: 55px;
 }
 
 .c-weather-card--online{
-
+    background-color: #3aa8fc;
 }
 
 .c-weather-card--offline{
+    background-color: #5D5E5F;
+}
+
+.c-weather-card-img{
+    margin-top: 20px;
+    margin-right: 15px;
+}
+
+.c-weather-card-img--image{
+    width: 70px;
+    height: 51px;
+}
+
+.c-weather-card-text{
+    margin-left: 20px;
+}
+
+.c-weather-card-stats{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
 }
 
 .c-weather-card-info{
-
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
 }
 
 .c-weather-card-info__location{
-
+    font-size: 22px;
+    margin-bottom: 0px;
 }
 
-.c-weather-card-info__icon{
-
-}
 
 .c-weather-card-info__region{
-
+    font-size: 12px;
 }
 
-.c-weather-card-results{
 
+.c-weather-card-info__temperature{
+    font-size: 28px;
+    margin-bottom: 0px;
+    margin-top: 15px;
 }
 
-.c-weather-card-results__temperature{
-
+.c-weather-card-info__rain-img{
+    margin-bottom: -10px;
+    margin-left: 40px;
 }
 
-.c-weather-card-results__rain{
 
+.c-weather-card-info__rain{
+    font-size: 15px;
+    margin-bottom: 0px;
+    margin-left: 8px;
 }
 
-.c-weather-card-results__wind{
+.c-weather-card-info__wind-img{
+    margin-bottom: -10px;
+    margin-left: 40px;
+}
 
+.c-weather-card-info__wind{
+    font-size: 15px;
+    margin-bottom: 0px;
+    margin-left: 8px;
 }
 

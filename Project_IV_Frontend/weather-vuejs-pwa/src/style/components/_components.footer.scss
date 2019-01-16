@@ -1,13 +1,22 @@
 .c-footer { 
-
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 60px;
+    width: 100%;
+    background-color: white;
+    flex-direction: row;
+    justify-content: space-evenly;
+    display: flex;
+    align-items: center;
 }
 
 .c-footer__profile{
-    
+    height: 25px;
 }
 
 .c-footer__home{
-
+    height: 25px;
 }
 
 .c-footer__messaging{

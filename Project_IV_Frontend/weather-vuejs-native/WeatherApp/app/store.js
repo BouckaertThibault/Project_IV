@@ -32,7 +32,7 @@ export default new Vuex.Store({
     login({commit}, user){
       return new Promise((resolve, reject) => {
         commit('authRequest')
-        axios({url: 'https://localhost:44301/api/Auth/token', data: user, method: 'POST' })
+        axios({url: 'https://projectivapi20190112011952.azurewebsites.net/api/Auth/token', data: user, method: 'POST' })
         .then(resp => {
           console.log(resp);
           const token = resp.data.token
@@ -53,48 +53,21 @@ export default new Vuex.Store({
         })
       })
   },
-  login2({commit}, user){
-    return new Promise((resolve, reject) => {
-      commit('authRequest')
-        request({
-          url: "https://localhost:44301/api/Auth/token",
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          content: user
-      }).then((resp) => {
-        console.log(resp);
-        const token = resp.data.token
-        const user = resp.data.user
-        console.log("TRYING TO SAVE TOKEN: " + token)
-        appSettings.setString("token", JSON.stringify(token))
-        console.log("TOKEN SAVE COMPLETE")
-        // axios.defaults.headers.common['Authorization'] = token
-        commit('authSuccess', token, user)
-        commit('saveUsername', resp.data.userName)
-        resolve(resp)
-      }, (e) => {
-          commit('authError')
-          console.log(e)
-          appSettings.remove("token")
-          reject(e)
-      });
-    })
-  },
   register({commit}, user){
     return new Promise((resolve, reject) => {
       commit('authRequest')
-      axios({url: 'https://localhost:44301/api/Auth/register', data: user, method: 'POST' })
+      axios({url: 'https://projectivapi20190112011952.azurewebsites.net/api/Auth/register', data: user, method: 'POST' })
       .then(resp => {
+        console.log(resp);
         const token = resp.data.token
         const user = resp.data.user
-        appSettings.setString("token", token)
         // axios.defaults.headers.common['Authorization'] = token
         commit('authSuccess', token, user)
         resolve(resp)
       })
       .catch(err => {
         commit('authError', err)
-        appSettings.remove("token")
+        
         reject(err)
       })
     })

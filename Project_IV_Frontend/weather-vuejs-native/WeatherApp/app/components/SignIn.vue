@@ -25,6 +25,7 @@
 
 <script>
 import Weathercards from '@/components/Weathercards';
+import Addlocation from '@/components/AddLocation';
 
   export default {
     name: 'Signin',
@@ -39,8 +40,8 @@ import Weathercards from '@/components/Weathercards';
       login: function () {
         let username = this.username 
         let password = this.password
-        this.$store.dispatch('login2', { username, password })
-       .then(() => {this.$navigateTo(Weathercards); this.isActive=false;})
+        this.$store.dispatch('login', { username, password })
+       .then(() => {this.$navigateTo(Addlocation); this.isActive=false;})
        .catch(err => {console.log(err); this.isActive=true;})
       }
     },

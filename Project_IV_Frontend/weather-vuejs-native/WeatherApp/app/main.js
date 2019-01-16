@@ -4,6 +4,7 @@ import VueDevtools from 'nativescript-vue-devtools'
 import store from './store';
 import Axios from 'axios'
 
+Vue.registerElement("Mapbox", () => require("nativescript-mapbox").MapboxView)
 Vue.prototype.$http = Axios;
 
 if(TNS_ENV !== 'production') {

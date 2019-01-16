@@ -1,6 +1,12 @@
 <template>
   <div class="o-container">
-    <location-header></location-header>
+    <div class="c-header">
+          <div class="c-header__locations">
+              <h3>My Objects</h3> 
+              <p>3 working</p>
+          </div>
+          <router-link to="addlocation"><primary-button class="c-primary-button--weathercards">New object</primary-button></router-link>
+      </div>
     <draggable v-model='savedLocation'>
       <weather-card v-for="l in getLocations" :key="l" :woeid="l"/>
     </draggable>
@@ -9,19 +15,21 @@
 </template>
 
 <script>
-  import LocationHeader from "@/components/LocationHeader";
+  // import LocationHeader from "@/components/LocationHeader";
   import WeatherCard from "@/components/WeatherCard"
   import AppFooter from "@/components/AppFooter";
   import draggable from 'vuedraggable'
+  import PrimaryButton from "@/components/forms/PrimaryButton";
 
 
   export default {
     name: 'weathercards',
     components: {
-      LocationHeader,
+      // LocationHeader,
       WeatherCard,
       AppFooter,
-      draggable
+      draggable,
+      PrimaryButton
     },
     computed:{
       getLocations: function() {
@@ -43,4 +51,5 @@
 <style scoped lang="scss">
   @import './src/style/base';
   @import './src/style/components/components.container';
+  @import './src/style/components/components.header';
 </style>

@@ -6,33 +6,56 @@
                 <label text="Sign up" class="label-title"/>
                 <StackLayout class="input-field">
                     <Label text="Username" class="label"/>
-                    <TextField hint="Username" class="inputfield"></TextField>
+                    <TextField v-model="username" hint="Username" class="inputfield"></TextField>
                 </StackLayout>
 
                 <StackLayout class="input-field">
                     <Label text="Email" class="label"/>
-                    <TextField hint="Email" class="inputfield"></TextField>
+                    <TextField v-model="email" hint="Email" class="inputfield"></TextField>
                 </StackLayout>
 
                 <StackLayout class="input-field">
                     <Label text="Password" class="label"/>
-                    <TextField hint="Password" secure="true" class="inputfield"></TextField>
+                    <TextField v-model="password" hint="Password" secure="true" class="inputfield"></TextField>
                 </StackLayout>
 
                 <StackLayout class="input-field">
                     <Label text="Confirm password" class="label"/>
-                    <TextField hint="Password" secure="true" class="inputfield"></TextField>
+                    <TextField v-model="password_confirmation" hint="Password" secure="true" class="inputfield"></TextField>
                 </StackLayout>
 
-                <Button text="Sign up" class="btn btn-primary btn-rounded-lg c-primary-button"  height="50"></Button>
+                <Button text="Sign up" class="btn btn-primary btn-rounded-lg c-primary-button"  height="50" @tap="register()"></Button>
             </StackLayout>
         </FlexboxLayout>
     </Page>
 </template>
 
 <script>
+import SignIn from '@/components/SignIn';
+
   export default {
     name: 'Signup',
+    data(){
+      return {
+        username : "",
+        email : "",
+        password : "",
+        password_confirmation : "",
+        isActive: false
+      }
+    },
+    methods: {
+        register: function () {
+          let data = {
+            username: this.username,
+            email: this.email,
+            password: this.password
+          }
+          this.$store.dispatch('register', data)
+        .then(() => {this.$navigateTo(SignIn); this.isActive=false;})
+        .catch(err => {console.log(err); this.isActive=true;})
+        }
+  }
   }
 </script>
 

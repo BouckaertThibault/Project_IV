@@ -4,7 +4,7 @@
               <h3>My Objects</h3> 
               <p>3 working</p>
           </div>
-          <primary-button/>
+          <primary-button class="c-primary-button--weathercards"/>
       </div>
 </template>
 

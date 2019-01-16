@@ -1,10 +1,38 @@
 <template>
+  <!-- <div class="c-weather-card">
+      <div class="c-weather-card-info">
+        <div class="c-weather-card-text">
+          <p>woeid: {{woeid}}</p>
+          <p class="c-weather-card-info__location">City: {{city}}</p>
+          <p class="c-weather-card-info__region">Region: {{region}}</p>
+          <div class="c-weather-card-stats">
+            <p class="c-weather-card-info__temperature">Temperatuur: {{temperatuur}}°C</p>
+            <p class="c-weather-card-info__rain">Vochtigheid: {{humidity}}</p>
+            <p class="c-weather-card-info__wind">Wind: {{humidity}}</p>
+          </div>
+        </div>
+        <div class="c-weather-card-img">
+          <img src="@/assets/sunny-activated.png" alt="Logo" class="c-weather-card-img--image">
+        </div>
+      </div>
+  </div> -->
   <div class="c-weather-card">
-      <div>
-        <p>woeid: {{woeid}}</p>
-        <p>City: {{city}}</p>
-        <p>Wind: {{wind}}mph</p>
-        <p>Vochtigheid: {{humidity}}</p>
+      <div class="c-weather-card-info">
+        <div class="c-weather-card-text">
+          <p class="c-weather-card-info__location">The Lilac Field</p>
+          <p class="c-weather-card-info__region">Kharkov region,
+Dergachevsky district</p>
+          <div class="c-weather-card-stats">
+            <p class="c-weather-card-info__temperature">25°C</p>
+            <img src="@/assets/Neerslag.png" alt="Logo" class="splash-img c-weather-card-info__rain-img">
+            <p class="c-weather-card-info__rain">40%</p>
+            <img src="@/assets/windsnelheid.png" alt="Logo" class="splash-img c-weather-card-info__wind-img">
+            <p class="c-weather-card-info__wind">40%</p>
+          </div>
+        </div>
+        <div class="c-weather-card-img">
+          <img src="@/assets/sunny-activated.png" alt="Logo" class="c-weather-card-img--image">
+        </div>
       </div>
   </div>
 </template>

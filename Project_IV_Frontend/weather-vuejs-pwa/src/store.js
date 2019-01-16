@@ -31,7 +31,7 @@ export default new Vuex.Store({
     login({commit}, user){
       return new Promise((resolve, reject) => {
         commit('authRequest')
-        axios({url: 'https://localhost:44301/api/Auth/token', data: user, method: 'POST' })
+        axios({url: 'https://projectivapi20190112011952.azurewebsites.net/api/Auth/token', data: user, method: 'POST' })
         .then(resp => {
           console.log(resp);
           const token = resp.data.token
@@ -52,7 +52,7 @@ export default new Vuex.Store({
   register({commit}, user){
     return new Promise((resolve, reject) => {
       commit('authRequest')
-      axios({url: 'https://localhost:44301/api/Auth/register', data: user, method: 'POST' })
+      axios({url: 'https://projectivapi20190112011952.azurewebsites.net/api/Auth/register', data: user, method: 'POST' })
       .then(resp => {
         const token = resp.data.token
         const user = resp.data.user
