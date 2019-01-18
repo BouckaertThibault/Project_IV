@@ -8,7 +8,7 @@
           <router-link to="addlocation"><primary-button class="c-primary-button--weathercards">New object</primary-button></router-link>
       </div>
     <draggable v-model='savedLocation'>
-      <weather-card v-for="l in getLocations" :key="l" :woeid="l"/>
+      <weather-card  @click.native="editCard(l.name)" v-for="l in getLocations" :key="l.id" :woeid="l" />
     </draggable>
     <app-footer></app-footer>
   </div>
@@ -31,6 +31,11 @@
       draggable,
       PrimaryButton
     },
+    methods: {
+      editCard: function (name) {
+        this.$router.push({ name: 'editweathercard', params: { LocationId: name } })
+    }
+    },
     computed:{
       getLocations: function() {
         return this.$store.getters.getAllLocations;
@@ -44,6 +49,7 @@
         }
     }
     },
+    
 
   }
 </script>

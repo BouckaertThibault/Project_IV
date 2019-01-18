@@ -1,0 +1,211 @@
+@import  '../settings/_settings.global';
+
+.c-weather-card{
+    height: 250px;
+    background-color: #3aa8fc;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.c-weather-card:last-child{
+    margin-bottom: 55px;
+}
+
+.c-weather-card--online{
+    background-color: #3aa8fc;
+}
+
+.c-weather-card--offline{
+    background-color: #5D5E5F;
+}
+
+.c-weather-card-img{
+    margin-top: 20px;
+    margin-right: 15px;
+}
+
+.c-weather-card-img--image{
+    width: 70px;
+    height: 51px;
+}
+
+.c-weather-card-text{
+    margin-left: 20px;
+}
+
+.c-weather-card-stats{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+.c-weather-card-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+.c-weather-card-info__location{
+    font-size: 22px;
+    margin-bottom: 0px;
+}
+
+
+.c-weather-card-info__region{
+    font-size: 12px;
+}
+
+
+.c-weather-card-info__temperature{
+    font-size: 28px;
+    margin-bottom: 0px;
+    margin-top: 15px;
+}
+
+.c-weather-card-info__rain-img{
+    margin-bottom: -10px;
+    margin-left: 40px;
+}
+
+
+.c-weather-card-info__rain{
+    font-size: 15px;
+    margin-bottom: 0px;
+    margin-left: 8px;
+}
+
+.c-weather-card-info__wind-img{
+    margin-bottom: -10px;
+    margin-left: 40px;
+}
+
+.c-weather-card-info__wind{
+    font-size: 15px;
+    margin-bottom: 0px;
+    margin-left: 8px;
+}
+
+.c-edit-variable{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.c-edit-variable > label
+{
+    box-sizing: border-box;
+   flex: 1 0 50%;
+   text-align: left;
+   margin-bottom: 15px;
+}
+
+.c-edit-variable > label:nth-child(2)
+{
+font-weight: 450;
+   text-align: right;
+}
+
+.c-edit-variable > input
+{
+    flex: 0 1 100%;
+    margin-bottom: 15px;
+}
+
+.c-edit-button{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
+
+
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+  }
+  input[type=range]:focus {
+    outline: none;
+  }
+  input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.14), 0px 0px 0px rgba(13, 13, 13, 0.14);
+    background: #0090ff;
+    border-radius: 19.5px;
+    border: 1.8px solid rgba(1, 1, 1, 0);
+  }
+  input[type=range]::-webkit-slider-thumb {
+    box-shadow: 3px 3px 3.7px rgba(0, 0, 0, 0.21), 0px 0px 3px rgba(13, 13, 13, 0.21);
+    border: 0px solid rgba(0, 0, 0, 0);
+    height: 15px;
+    width: 15px;
+    border-radius: 50px;
+    background: #ffffff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -7.3px;
+  }
+  input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #0090ff;
+  }
+  input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.14), 0px 0px 0px rgba(13, 13, 13, 0.14);
+    background: #0090ff;
+    border-radius: 19.5px;
+    border: 1.8px solid rgba(1, 1, 1, 0);
+  }
+  input[type=range]::-moz-range-thumb {
+    box-shadow: 3px 3px 3.7px rgba(0, 0, 0, 0.21), 0px 0px 3px rgba(13, 13, 13, 0.21);
+    border: 0px solid rgba(0, 0, 0, 0);
+    height: 15px;
+    width: 15px;
+    border-radius: 50px;
+    background: #ffffff;
+    cursor: pointer;
+  }
+  input[type=range]::-ms-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+  input[type=range]::-ms-fill-lower {
+    background: #0090ff;
+    border: 1.8px solid rgba(1, 1, 1, 0);
+    border-radius: 39px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.14), 0px 0px 0px rgba(13, 13, 13, 0.14);
+  }
+  input[type=range]::-ms-fill-upper {
+    background: #0090ff;
+    border: 1.8px solid rgba(1, 1, 1, 0);
+    border-radius: 39px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.14), 0px 0px 0px rgba(13, 13, 13, 0.14);
+  }
+  input[type=range]::-ms-thumb {
+    box-shadow: 3px 3px 3.7px rgba(0, 0, 0, 0.21), 0px 0px 3px rgba(13, 13, 13, 0.21);
+    border: 0px solid rgba(0, 0, 0, 0);
+    height: 15px;
+    width: 15px;
+    border-radius: 50px;
+    background: #ffffff;
+    cursor: pointer;
+    height: 4px;
+  }
+  input[type=range]:focus::-ms-fill-lower {
+    background: #0090ff;
+  }
+  input[type=range]:focus::-ms-fill-upper {
+    background: #0090ff;
+  }
+  

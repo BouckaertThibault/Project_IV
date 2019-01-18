@@ -7,8 +7,8 @@
     :mapStyle.sync="mapStyle">
     </mgl-map>
     <form class="c-card" @submit.prevent="searchButton">
-      <h1>Add Location</h1>
-      <input type="text" :value="location" placeholder="Search for a location"/>
+      <h1 class="c-card--title">Add Location</h1>
+      <input class="c-form-input c-card--input" type="text" :value="location" placeholder="Search for a location"/>
       <primary-button @click="searchButton">Add {{location}}</primary-button>
     </form>
   </div>
@@ -47,26 +47,44 @@ export default {
       }
      
     },
-    searchLocation: function() {
-      console.log("this is location: " + this.location);
-      const endpoint = `https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text%3D%22${ this.location }%22&format=json`;
+    // searchLocation: function() {
+    //   console.log("this is location: " + this.location);
+    //   const endpoint = `https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text%3D%22${ this.location }%22&format=json`;
 
-      fetch(endpoint)
-        .then(response => response.json())
-        .then(data=>{
-          //this.addMarkerData(data.query.results.place);
-          let cityObj = null;
-          if(Array.isArray(data.query.results.place)){
-            cityObj = data.query.results.place[0];
-          }
-          else {
-            cityObj = data.query.results.place;
-          }
-          this.$store.dispatch('addWeatherLocation', cityObj);
-        })
-        .catch(err => {
-          console.error('An error occured: ', err);
-        })
+    //   fetch(endpoint)
+    //     .then(response => response.json())
+    //     .then(data=>{
+    //       //this.addMarkerData(data.query.results.place);
+    //       let cityObj = null;
+    //       if(Array.isArray(data.query.results.place)){
+    //         cityObj = data.query.results.place[0];
+    //       }
+    //       else {
+    //         cityObj = data.query.results.place;
+    //       }
+    //       this.$store.dispatch('addWeatherLocation', cityObj);
+    //     })
+    //     .catch(err => {
+    //       console.error('An error occured: ', err);
+    //     })
+    // },
+    searchLocation: function() {
+
+      const endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${this.location}&units=metric&appid=83dec79fbb45d7ddc77f9657e7a41084`;
+
+       fetch(endpoint)
+          .then(response => response.json())
+          
+          .then(data=>{
+            console.log('DATA: ' + data);
+            this.$store.dispatch('addWeatherLocation', data)
+
+          })
+          .then(() => {this.$router.push('/weathercards')})
+          .catch(err => {
+            console.error('An error occured: ', err);
+          })
+
     },
     addNewLocation: function(el, e){
       console.log('clicked');
@@ -104,5 +122,6 @@ export default {
 <style lang="scss">
   @import './src/style/base';
   @import './src/style/components/components.map';
+  @import './src/style/elements/elements.forms';
   @import './src/style/elements/elements.card';
 </style>

@@ -2,16 +2,14 @@
 
 .c-card{
     z-index: 2;
-    width: 75%;
-    height: 196px;
+    width: 90%;
+    height: 175px;
     position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: $white;
-    padding-left: #{ $gutter }px;
-    padding-right: #{ $gutter }px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -20,5 +18,15 @@
 }
 
 .c-card > *:not(:first-child){
-    margin-top: 20px;
+    
+    width: 90%;
+}
+
+.c-card--input{
+    margin-bottom: 20px !important;
+    margin-top: 20px !important;
+}
+
+.c-card--title{
+    margin-bottom: 0px !important;
 }

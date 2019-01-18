@@ -32,6 +32,14 @@ let router = new Router({
       }
     },
     {
+      path: '/editweathercard/:LocationId',
+      name: 'editweathercard',
+      component: () => import(/* webpackChunkName: "editweathercard" */ './views/EditWeathercard.vue'),
+      meta: { 
+        requiresAuth: true
+      }
+    },
+    {
       path: '/addlocation',
       name: 'addlocation',
       component: () => import(/* webpackChunkName: "addlocation" */ './views/AddLocation.vue'),

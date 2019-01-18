@@ -4,11 +4,11 @@
         <div class="c-weather-card-text">
           <p>woeid: {{woeid}}</p>
           <p class="c-weather-card-info__location">City: {{city}}</p>
-          <p class="c-weather-card-info__region">Region: {{region}}</p>
+          <p class="c-weather-card-info__region">Country: {{country}}</p>
           <div class="c-weather-card-stats">
             <p class="c-weather-card-info__temperature">Temperatuur: {{temperatuur}}°C</p>
             <p class="c-weather-card-info__rain">Vochtigheid: {{humidity}}</p>
-            <p class="c-weather-card-info__wind">Wind: {{humidity}}</p>
+            <p class="c-weather-card-info__wind">Wind: {{wind}}</p>
           </div>
         </div>
         <div class="c-weather-card-img">
@@ -16,18 +16,19 @@
         </div>
       </div>
   </div> -->
+  
   <div class="c-weather-card">
       <div class="c-weather-card-info">
         <div class="c-weather-card-text">
-          <p class="c-weather-card-info__location">The Lilac Field</p>
-          <p class="c-weather-card-info__region">Kharkov region,
-Dergachevsky district</p>
+          <slot></slot>
+          <p class="c-weather-card-info__location">{{city}}</p>
+          <p class="c-weather-card-info__region">{{country}}</p>
           <div class="c-weather-card-stats">
-            <p class="c-weather-card-info__temperature">25°C</p>
+            <p class="c-weather-card-info__temperature">{{temperatuur}}°C</p>
             <img src="@/assets/Neerslag.png" alt="Logo" class="splash-img c-weather-card-info__rain-img">
-            <p class="c-weather-card-info__rain">40%</p>
+            <p class="c-weather-card-info__rain">{{humidity}}%</p>
             <img src="@/assets/windsnelheid.png" alt="Logo" class="splash-img c-weather-card-info__wind-img">
-            <p class="c-weather-card-info__wind">40%</p>
+            <p class="c-weather-card-info__wind">{{wind}} km/h</p>
           </div>
         </div>
         <div class="c-weather-card-img">
@@ -43,13 +44,14 @@ export default {
   data(){
     return{
       city: '',
-      wind: '',
+      country: '',
+      temperatuur: '',
       humidity: '',
+      wind: ''
     }
   },
   props: {
    woeid: {
-    type: String,
     required: true
    }
   },
@@ -57,20 +59,32 @@ export default {
       this.searchWeather(this.woeid);
   },
   methods:{
+      // searchWeather: function(woeid) {
+      //   const endpoint = `https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(${woeid})&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys`;
+
+      //   fetch(endpoint)
+      //     .then(response => response.json())
+      //     .then(data=>{
+      //       this.city = data.query.results.channel.location.city;
+      //       this.wind = data.query.results.channel.wind.speed
+      //       this.humidity = data.query.results.channel.atmosphere.humidity;
+
+      //     })
+      //     .catch(err => {
+      //       console.error('An error occured: ', err);
+      //     })
+      // }
       searchWeather: function(woeid) {
-        const endpoint = `https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(${woeid})&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys`;
+        
+        
+            this.city = woeid.name;
+            this.country = woeid.sys.country;
+            this.temperatuur = woeid.main.temp;
+            this.wind = woeid.wind.speed;
+            this.humidity = woeid.main.humidity;
 
-        fetch(endpoint)
-          .then(response => response.json())
-          .then(data=>{
-            this.city = data.query.results.channel.location.city;
-            this.wind = data.query.results.channel.wind.speed
-            this.humidity = data.query.results.channel.atmosphere.humidity;
-
-          })
-          .catch(err => {
-            console.error('An error occured: ', err);
-          })
+          
+         
       }
     }
 }

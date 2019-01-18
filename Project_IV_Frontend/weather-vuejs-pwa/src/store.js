@@ -15,6 +15,9 @@ export default new Vuex.Store({
   },
   getters: {
     getAllLocations: state => state.savedLocations,
+    getLocationById: (state) => (name) => {
+      return state.savedLocations.find(todo => todo.name === name)
+    },
     getToken: state => state.token,
     isLoggedIn: state => !!state.token,
     authStatus: state => state.status,
@@ -22,8 +25,11 @@ export default new Vuex.Store({
     loggedUsername: state => state.username,
   },
   actions: {
-    addWeatherLocation: ({commit}, locationObj) => {
-      commit('saveNewLocation', locationObj.woeid);
+    // addWeatherLocation: ({commit}, locationObj) => {
+    //   commit('saveNewLocation', locationObj.woeid);
+    // },
+    addWeatherLocation: ({commit}, city) => {
+      commit('saveNewLocation', city);
     },
     updateSavedLocations: ({commit}, newLocations) => {
       commit('overwriteLocationOrder', newLocations)
