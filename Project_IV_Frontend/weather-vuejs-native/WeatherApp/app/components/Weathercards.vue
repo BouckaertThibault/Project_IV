@@ -6,7 +6,7 @@
                 <label class="c-weathercards--title" col="0" >My objects</label>
                 <Button col="1" class="btn btn-primary btn-rounded-lg c-primary-button" height="40" width="100%" @tap="AddLocation()">New object</Button>
             </GridLayout>
-            <ScrollView row="1" orientation="vertical" >
+            <ScrollView row="1" orientation="vertical" scrollBarIndicatorVisible="false">
               <StackLayout>
               <Weathercard @tap="editCard" v-for="l in getLocations" :key="l.id" :woeid="l"></Weathercard>
               </StackLayout>

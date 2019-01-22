@@ -1,29 +1,45 @@
 @import  '../settings/_settings.global';
 
-.c-weathercard{
+.c-editweathercard{
     border-width: 15;
     border-color: #3aa8fc;
     background-color: #3aa8fc;
-    margin-bottom: 20;
 }
 
-.c-weathercard--title{
+.c-editweathercard--leftlabel{
+    horizontal-align: left;
+    padding-left:10;
+}
+
+.c-editweathercard--rightlabel{
+    horizontal-align: right;
+    text-align: right;
+    font-weight: bold;
+    padding-right:10;
+}
+
+.c-editweathercard--border{
+    border-width: 15, 15, 0, 15;
+    border-color: white;
+}
+
+.c-editweathercard--title{
     color: white;
     padding-top: 25;
     font-size: 22;
     font-weight: bold;
 }
 
-.c-weathercard--img{
+.c-editweathercard--img{
     // margin-left: 70;
     margin-bottom: 20;
 }
 
-.c-weathercard--country{
+.c-editweathercard--country{
     color: white;
 }
 
-.c-weathercard--temperature{
+.c-editweathercard--temperature{
     font-size: 22;
     font-weight: bold;
     color:white;
@@ -31,11 +47,11 @@
     margin-bottom: auto;
 }
 
-.c-weathercard--rest{
+.c-editweathercard--rest{
     margin-bottom: 20;
     color:white;
 }
 
-.c-weathercard--mini{
+.c-editweathercard--mini{
     padding-left: 10;
 }

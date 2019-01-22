@@ -3961,10 +3961,10 @@ nanomatch@^1.2.9:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-nativescript-dev-webpack@next:
-  version "0.19.1-next-2019-01-11-110522-01"
-  resolved "https://registry.yarnpkg.com/nativescript-dev-webpack/-/nativescript-dev-webpack-0.19.1-next-2019-01-11-110522-01.tgz#a770f818e79c924f4fda10b510b1cdca19ad3944"
-  integrity sha512-1Zz4LW8xIvYlA7TnkH2+vPUMXLmBQEZGSqVGKz46YevYZ3qVz8dzBze2h5JKBLDOQUeMMeYFgeRQNz+cbLGLbA==
+nativescript-dev-webpack@^0.19.1-next-2019-01-14-120258-01:
+  version "0.19.1-next-2019-01-14-120258-01"
+  resolved "https://registry.yarnpkg.com/nativescript-dev-webpack/-/nativescript-dev-webpack-0.19.1-next-2019-01-14-120258-01.tgz#a071a37b673a8eaa4a819d6d1dc502eec4aa97e5"
+  integrity sha512-/mNrmCNwXq/cXO5ToccbR/RugWbFdgE1+vAHoaMVTdunDmOEob9r8/SCtytFNGJW5jY2H7jytwYMb76YW+9ReA==
   dependencies:
     "@angular-devkit/core" "~7.1.0"
     clean-webpack-plugin "~1.0.0"
@@ -3998,6 +3998,11 @@ nativescript-hook@0.2.4:
     glob "^6.0.1"
     mkdirp "^0.5.1"
 
+nativescript-mapbox@^4.4.1:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/nativescript-mapbox/-/nativescript-mapbox-4.4.1.tgz#35fcbc21f146a903c3f3f982678afe46f7ec4b65"
+  integrity sha512-lgKVCRTPRFCRxZsxhdLWJrFQ+tAAuuQ0o3z9gsB8dn7X9bQnj/pjdMK87p96Yb6eXzlxxVosOaH2xDBEzxyNFQ==
+
 nativescript-socket.io@^0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/nativescript-socket.io/-/nativescript-socket.io-0.9.0.tgz#3bd64f0549dbc5165a92b425484f15fe9ed35878"
@@ -4026,7 +4031,7 @@ nativescript-vue-template-compiler@^2.0.0:
     de-indent "^1.0.2"
     he "^1.1.0"
 
-nativescript-vue@^2.0.0:
+nativescript-vue@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/nativescript-vue/-/nativescript-vue-2.0.2.tgz#0af653a00f9462e336387ae22c8501d29e180069"
   integrity sha512-X4tSaPorPblbYcU0JQ6AZvim7/7saIgCHHxLJ6Je/N2HfNsjeIROQI+fNsBVxtacrnauPjCugjOLr7KPC/n0eQ==

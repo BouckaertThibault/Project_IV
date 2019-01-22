@@ -1,23 +1,53 @@
 <template>
   <Page actionBarHidden="true">
         <ActionBar title="My App"/>
+        <ScrollView scrollBarIndicatorVisible="false">
         <StackLayout>
-          <GridLayout class="c-weathercard" width="100%" height="200" columns="3*,*" rows="*,*,*">
-              <label row="0" col="0" class="c-weathercard--title">{{b.name}}</label>
-              <label row="1" col="0" class="c-weathercard--country" >{{b.sys.country}}</label>
-              <Image rowSpan="2" col="1" row="0" class="c-weathercard--img"  src="~/assets/images/sunny-activated.png"
+          <GridLayout class="c-editweathercard" width="100%" height="200" columns="3*,*" rows="*,*,*">
+              <label row="0" col="0" class="c-editweathercard--title">{{b.name}}</label>
+              <label row="1" col="0" class="c-editweathercard--country" >{{b.sys.country}}</label>
+              <Image rowSpan="2" col="1" row="0" class="c-editweathercard--img"  src="~/assets/images/sunny-activated.png"
                   width="70" height="51" />
               <StackLayout row="2" colSpan="2" orientation="horizontal" width="340"
                   height="210" >
-                  <Label width="100" height="50" class="c-weathercard--temperature">{{b.main.temp}}°C</Label>
-                  <Image width="16" height="16" class="c-weathercard--rest"  src="~/assets/images/Neerslag.png" />
-                  <Label width="70" height="20" class="c-weathercard--rest c-weathercard--mini" >{{b.main.humidity}}%</Label>
-                  <Image width="16" height="16" class="c-weathercard--rest"  src="~/assets/images/windsnelheid.png" />
-                  <Label width="70" height="20" class="c-weathercard--rest c-weathercard--mini" >{{b.wind.speed}} km/h</Label>
+                  <Label width="100" height="50" class="c-editweathercard--temperature">{{b.main.temp}}°C</Label>
+                  <Image width="16" height="16" class="c-editweathercard--rest"  src="~/assets/images/Neerslag.png" />
+                  <Label width="70" height="20" class="c-editweathercard--rest c-editweathercard--mini" >{{b.main.humidity}}%</Label>
+                  <Image width="16" height="16" class="c-editweathercard--rest"  src="~/assets/images/windsnelheid.png" />
+                  <Label width="70" height="20" class="c-editweathercard--rest c-editweathercard--mini" >{{b.wind.speed}} km/h</Label>
               </StackLayout>
           </GridLayout>
-        <Label  width="100" height="50">PROP: {{$props.LocationId}}</Label>
+          <StackLayout class="c-editweathercard--border">
+            <GridLayout height="80" rows="*,*" columns="*,*">
+              <Label class="c-editweathercard--leftlabel" row="0" col="0" width="100" height="30">Temperature</Label>
+              <Label class="c-editweathercard--rightlabel" row="0" col="1" width="100" height="30" v-model="temp" @change="changeTemp" minValue="-50" maxValue="50">{{temp}}°C</Label>
+              <Slider row="1" colSpan="2" value="80" />
+            </GridLayout>
+            <GridLayout height="80" rows="*,*" columns="*,*">
+              <Label class="c-editweathercard--leftlabel" row="0" col="0" width="100" height="30">Wind speed</Label>
+              <Label class="c-editweathercard--rightlabel" row="0" col="1" width="100" height="30" v-model="windSpeed" @change="changeWindSpeed" minValue="0" maxValue="200">{{windSpeed}}km/h</Label>
+              <Slider row="1" colSpan="2" value="80" />
+            </GridLayout>
+            <GridLayout height="80" rows="*,*" columns="*,*">
+              <Label class="c-editweathercard--leftlabel" row="0" col="0" width="150" height="30">Direction of the wind</Label>
+              <Slider row="1" colSpan="2" value="80" />
+            </GridLayout>
+            <GridLayout height="80" rows="*,*" columns="*,*">
+              <Label class="c-editweathercard--leftlabel" row="0" col="0" width="100" height="30">Cloudiness</Label>
+              <Label class="c-editweathercard--rightlabel" row="0" col="1" width="100" height="30">{{cloud}}%</Label>
+              <Slider row="1" colSpan="2" minValue="0" maxValue="100" v-model="cloud" @change="changeCloud"/>
+            </GridLayout>
+            <GridLayout height="80" rows="*,*" columns="*,*">
+              <Label class="c-editweathercard--leftlabel" row="0" col="0" width="100" height="30">Humidity</Label>
+              <Label class="c-editweathercard--rightlabel" row="0" col="1" width="100" height="30">{{humidity}}%</Label>
+              <Slider row="1" colSpan="2" marginBottom="20" minValue="0" maxValue="100" v-model="humidity" @change="changeHumidity"/>
+            </GridLayout>
+            <Button  class="btn btn-primary btn-rounded-lg c-primary-button c-button-spacer c-primary-button-delete" width="100%" @tap="deleteData()">Delete card</Button>
+            <Button  class="btn btn-primary btn-rounded-lg c-primary-button c-button-spacer" width="100%" @tap="resetData()">Select default settings</Button>
+            <Button  class="btn btn-primary btn-rounded-lg c-primary-button c-button-spacer" width="100%" @tap="updateData()">Apply changes</Button>
+          </StackLayout>
         </StackLayout>
+        </ScrollView>
     </Page>
 </template>
 
@@ -111,6 +141,7 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+  @import './app/style/components/components.primary-button'; 
   @import './app/style/components/components.editweathercard';
   @import './app/style/elements/elements.labels';
   @import './app/style/elements/elements.page';
