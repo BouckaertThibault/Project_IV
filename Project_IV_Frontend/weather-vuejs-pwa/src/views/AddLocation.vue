@@ -5,10 +5,11 @@
     @click="addNewLocation($el ,$event)"
     :accessToken="accessToken"
     :mapStyle.sync="mapStyle">
+    <MglMarker :coordinates="coordinates" color="red" ></MglMarker>
     </mgl-map>
     <form class="c-card" @submit.prevent="searchButton">
       <h1 class="c-card--title">Add Location</h1>
-      <input class="c-form-input c-card--input" type="text" :value="location" placeholder="Search for a location"/>
+      <input class="c-form-input c-card--input" type="text" :value="location" placeholder="Tap for a location"/>
       <primary-button @click="searchButton">Add {{location}}</primary-button>
     </form>
   </div>
@@ -27,7 +28,8 @@ export default {
         location: '',
         markers: [],
         accessToken: 'pk.eyJ1IjoidGhpYmF1bHQ3IiwiYSI6ImNqbmxzOW9lYTE1ZGsza3M1aWRtNzg1NmkifQ.XdOPMxUfRUL7rVv2tG_3NA',
-        mapStyle: 'mapbox://styles/thibault7/cjnltgjr30lg12rozl2r91pvn'
+        mapStyle: 'mapbox://styles/thibault7/cjr5i8iwk452v2srx7pg929ka',
+        coordinates: [0,0]
       }
     },
     components:{
@@ -90,6 +92,8 @@ export default {
       console.log('clicked');
       console.log('Element, ', el);
       console.log('Event, ', e);
+      this.coordinates = [e.lngLat.lng, e.lngLat.lat];
+      console.log('coordinates: ' + this.coordinates);
       let test = this.$refs.map.queryRenderedFeatures(e.point,
         {
           radius: 10

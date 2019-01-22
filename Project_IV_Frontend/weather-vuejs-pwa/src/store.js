@@ -34,6 +34,12 @@ export default new Vuex.Store({
     updateSavedLocations: ({commit}, newLocations) => {
       commit('overwriteLocationOrder', newLocations)
     },
+    updateWeatherData: ({commit}, newData) => {
+      commit('overwriteWeatherData', newData)
+    },
+    deleteWeatherData: ({commit}, id) => {
+      commit('deleteWeatherData', id)
+    },
     login({commit}, user){
       return new Promise((resolve, reject) => {
         commit('authRequest')
@@ -97,6 +103,17 @@ export default new Vuex.Store({
     overwriteLocationOrder: (state, newLocs) =>{
       state.savedLocations = newLocs;
       localStorage.setItem("savedLocations", JSON.stringify(state.savedLocations))
+    },
+    overwriteWeatherData: (state, newData) =>{
+      var ori = state.savedLocations;
+      var data = new Array(newData);
+      var res = ori.map(obj => data.find(o => o.id === obj.id) || obj);
+      localStorage.setItem("savedLocations", JSON.stringify(res));
+    },
+    deleteWeatherData: (state, id) =>{
+      var ori = state.savedLocations;
+      var res = ori.filter(el => el.id !== id);
+      localStorage.setItem("savedLocations", JSON.stringify(res));
     },
     saveUsername(state, b){
       state.username = b

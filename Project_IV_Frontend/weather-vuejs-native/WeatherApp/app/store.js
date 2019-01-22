@@ -16,6 +16,9 @@ export default new Vuex.Store({
   },
   getters: {
     getAllLocations: state => state.savedLocations,
+    getLocationById: (state) => (name) => {
+      return state.savedLocations.find(todo => todo.name === name)
+    },
     getToken: state => state.token,
     isLoggedIn: state => !!state.token,
     authStatus: state => state.status,
@@ -23,11 +26,17 @@ export default new Vuex.Store({
     loggedUsername: state => state.username,
   },
   actions: {
-    addWeatherLocation: ({commit}, locationObj) => {
-      commit('saveNewLocation', locationObj.woeid);
+    addWeatherLocation: ({commit}, city) => {
+      commit('saveNewLocation', city);
     },
     updateSavedLocations: ({commit}, newLocations) => {
       commit('overwriteLocationOrder', newLocations)
+    },
+    updateWeatherData: ({commit}, newData) => {
+      commit('overwriteWeatherData', newData)
+    },
+    deleteWeatherData: ({commit}, id) => {
+      commit('deleteWeatherData', id)
     },
     login({commit}, user){
       return new Promise((resolve, reject) => {
@@ -89,12 +98,24 @@ export default new Vuex.Store({
   mutations: {
     saveNewLocation : (state, loc) => {
       state.savedLocations.push(loc);
+      console.log("SAVENEWLOCATION: " + state.savedLocations);
       //localstorage kan enkel een string saven, maar bijna zo groot als je wilt
       appSettings.setString("savedLocations", JSON.stringify(state.savedLocations));
     },
     overwriteLocationOrder: (state, newLocs) =>{
       state.savedLocations = newLocs;
       appSettings.setString("savedLocations", JSON.stringify(state.savedLocations));
+    },
+    overwriteWeatherData: (state, newData) =>{
+      var ori = state.savedLocations;
+      var data = new Array(newData);
+      var res = ori.map(obj => data.find(o => o.id === obj.id) || obj);
+      appSettings.setString("savedLocations", JSON.stringify(res));
+    },
+    deleteWeatherData: (state, id) =>{
+      var ori = state.savedLocations;
+      var res = ori.filter(el => el.id !== id);
+      appSettings.setString("savedLocations", JSON.stringify(res));
     },
     saveUsername(state, b){
       state.username = b

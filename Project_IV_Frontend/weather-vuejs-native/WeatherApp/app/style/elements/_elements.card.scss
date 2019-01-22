@@ -1,24 +1,14 @@
 @import  '../settings/_settings.global';
 
-.c-card{
-    z-index: 2;
-    width: 75%;
-    height: 196px;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: $white;
-    padding-left: #{ $gutter }px;
-    padding-right: #{ $gutter }px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
 
+.c-card--item{
+    margin-left: 20;
+    margin-right: 20;
 }
 
-.c-card > *:not(:first-child){
-    margin-top: 20px;
+.c-card--title{
+    text-align:center;
+    color:black;
+    font-size:16;
+    font-weight: bold;
 }

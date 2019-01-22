@@ -1,0 +1,42 @@
+@import  '../settings/_settings.global';
+
+.c-weathercard{
+    border-radius: 20;
+    border-width: 15;
+    border-color: #3aa8fc;
+    background-color: #3aa8fc;
+    margin-bottom: 20;
+}
+
+.c-weathercard--title{
+    color: white;
+    padding-top: 25;
+    font-size: 22;
+    font-weight: bold;
+}
+
+.c-weathercard--img{
+    // margin-left: 70;
+    margin-bottom: 20;
+}
+
+.c-weathercard--country{
+    color: white;
+}
+
+.c-weathercard--temperature{
+    font-size: 22;
+    font-weight: bold;
+    color:white;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.c-weathercard--rest{
+    margin-bottom: 20;
+    color:white;
+}
+
+.c-weathercard--mini{
+    padding-left: 10;
+}

@@ -38,10 +38,11 @@ import Addlocation from '@/components/AddLocation';
     },
     methods: {
       login: function () {
+        this.isBusy = false;
         let username = this.username 
         let password = this.password
         this.$store.dispatch('login', { username, password })
-       .then(() => {this.$navigateTo(Addlocation); this.isActive=false;})
+       .then(() => {this.$navigateTo(Weathercards); this.isActive=false;})
        .catch(err => {console.log(err); this.isActive=true;})
       }
     },

@@ -34,7 +34,7 @@
     methods: {
       editCard: function (name) {
         this.$router.push({ name: 'editweathercard', params: { LocationId: name } })
-    }
+      }
     },
     computed:{
       getLocations: function() {

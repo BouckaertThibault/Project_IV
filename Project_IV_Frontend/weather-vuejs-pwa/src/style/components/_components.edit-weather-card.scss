@@ -46,7 +46,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    
+    width: 100%;
 }
 
 .c-weather-card-info__location{
@@ -122,6 +122,11 @@ font-weight: 450;
 }
 
 
+
+.edit-number{
+    flex: 0 1 100%;
+    margin-bottom: 15px;
+}
 
 
 input[type=range] {
