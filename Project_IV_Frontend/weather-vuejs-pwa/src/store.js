@@ -104,16 +104,25 @@ export default new Vuex.Store({
       state.savedLocations = newLocs;
       localStorage.setItem("savedLocations", JSON.stringify(state.savedLocations))
     },
+    // overwriteWeatherData: (state, newData) =>{
+    //   var ori = state.savedLocations;
+    //   var data = new Array(newData);
+    //   var res = ori.map(obj => data.find(o => o.id === obj.id) || obj);
+    //   localStorage.setItem("savedLocations", JSON.stringify(res));
+    // },
     overwriteWeatherData: (state, newData) =>{
-      var ori = state.savedLocations;
       var data = new Array(newData);
-      var res = ori.map(obj => data.find(o => o.id === obj.id) || obj);
-      localStorage.setItem("savedLocations", JSON.stringify(res));
+      state.savedLocations = state.savedLocations.map(obj => data.find(o => o.id === obj.id) || obj);
+      localStorage.setItem("savedLocations", JSON.stringify(state.savedLocations));
     },
+    // deleteWeatherData: (state, id) =>{
+    //   var ori = state.savedLocations;
+    //   var res = ori.filter(el => el.id !== id);
+    //   localStorage.setItem("savedLocations", JSON.stringify(res));
+    // },
     deleteWeatherData: (state, id) =>{
-      var ori = state.savedLocations;
-      var res = ori.filter(el => el.id !== id);
-      localStorage.setItem("savedLocations", JSON.stringify(res));
+      state.savedLocations = state.savedLocations.filter(el => el.id !== id);
+      localStorage.setItem("savedLocations", JSON.stringify(state.savedLocations));
     },
     saveUsername(state, b){
       state.username = b

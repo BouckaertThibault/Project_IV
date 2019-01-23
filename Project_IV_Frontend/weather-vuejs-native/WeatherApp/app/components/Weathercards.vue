@@ -25,6 +25,18 @@
     components: {
       Weathercard,
     },
+    beforeCreate(){
+      console.log("WEATHERCARDS BEFORECREATED!!!!");
+    },
+    created(){
+      console.log("WEATHERCARDS CREATED!!!!");
+    },
+    mounted(){
+      console.log("WEATHERCARDS MOUNTED!!!");
+    },
+    updated(){
+      console.log("WEATHERCARDS UPDATED!!!");
+    },
     methods: {
       AddLocation: function() {
      this.$navigateTo(AddLocation)

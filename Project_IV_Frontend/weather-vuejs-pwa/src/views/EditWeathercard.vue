@@ -98,6 +98,7 @@
         this.b.main.humidity = this.humidity;
         console.log("test2" + JSON.stringify(this.b));
         this.$store.dispatch('updateWeatherData', this.b)
+        this.$router.push('/weathercards');
       },
       resetData: function() {
           const endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${this.$route.params.LocationId}&units=metric&appid=83dec79fbb45d7ddc77f9657e7a41084`;

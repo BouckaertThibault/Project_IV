@@ -4,29 +4,29 @@
         <ScrollView scrollBarIndicatorVisible="false">
         <StackLayout>
           <GridLayout class="c-editweathercard" width="100%" height="200" columns="3*,*" rows="*,*,*">
-              <label row="0" col="0" class="c-editweathercard--title">{{b.name}}</label>
-              <label row="1" col="0" class="c-editweathercard--country" >{{b.sys.country}}</label>
+              <label row="0" col="0" class="c-editweathercard--title">{{C.name}}</label>
+              <label row="1" col="0" class="c-editweathercard--country" >{{C.sys.country}}</label>
               <Image rowSpan="2" col="1" row="0" class="c-editweathercard--img"  src="~/assets/images/sunny-activated.png"
                   width="70" height="51" />
               <StackLayout row="2" colSpan="2" orientation="horizontal" width="340"
                   height="210" >
-                  <Label width="100" height="50" class="c-editweathercard--temperature">{{b.main.temp}}°C</Label>
+                  <Label width="100" height="50" class="c-editweathercard--temperature">{{C.main.temp}}°C</Label>
                   <Image width="16" height="16" class="c-editweathercard--rest"  src="~/assets/images/Neerslag.png" />
-                  <Label width="70" height="20" class="c-editweathercard--rest c-editweathercard--mini" >{{b.main.humidity}}%</Label>
+                  <Label width="70" height="20" class="c-editweathercard--rest c-editweathercard--mini" >{{C.main.humidity}}%</Label>
                   <Image width="16" height="16" class="c-editweathercard--rest"  src="~/assets/images/windsnelheid.png" />
-                  <Label width="70" height="20" class="c-editweathercard--rest c-editweathercard--mini" >{{b.wind.speed}} km/h</Label>
+                  <Label width="70" height="20" class="c-editweathercard--rest c-editweathercard--mini" >{{C.wind.speed}} km/h</Label>
               </StackLayout>
           </GridLayout>
           <StackLayout class="c-editweathercard--border">
             <GridLayout height="80" rows="*,*" columns="*,*">
               <Label class="c-editweathercard--leftlabel" row="0" col="0" width="100" height="30">Temperature</Label>
-              <Label class="c-editweathercard--rightlabel" row="0" col="1" width="100" height="30" v-model="temp" @change="changeTemp" minValue="-50" maxValue="50">{{temp}}°C</Label>
-              <Slider row="1" colSpan="2" value="80" />
+              <Label class="c-editweathercard--rightlabel" row="0" col="1" width="100" height="30" >{{temp}}°C</Label>
+              <Slider row="1" colSpan="2" value="80" v-model="temp" @change="changeTemp" minValue="-50" maxValue="50"/>
             </GridLayout>
             <GridLayout height="80" rows="*,*" columns="*,*">
               <Label class="c-editweathercard--leftlabel" row="0" col="0" width="100" height="30">Wind speed</Label>
-              <Label class="c-editweathercard--rightlabel" row="0" col="1" width="100" height="30" v-model="windSpeed" @change="changeWindSpeed" minValue="0" maxValue="200">{{windSpeed}}km/h</Label>
-              <Slider row="1" colSpan="2" value="80" />
+              <Label class="c-editweathercard--rightlabel" row="0" col="1" width="100" height="30" >{{windSpeed}}km/h</Label>
+              <Slider row="1" colSpan="2" value="80" v-model="windSpeed" @change="changeWindSpeed" minValue="0" maxValue="200"/>
             </GridLayout>
             <GridLayout height="80" rows="*,*" columns="*,*">
               <Label class="c-editweathercard--leftlabel" row="0" col="0" width="150" height="30">Direction of the wind</Label>
@@ -52,6 +52,8 @@
 </template>
 
 <script>
+import Weathercards from '@/components/Weathercards';
+
 export default {
   props: ["LocationId"],
   name: 'EditWeathercard',
@@ -62,7 +64,8 @@ export default {
         windSpeed: "",
         windDirection: "",
         cloud: "",
-        humidity: ""
+        humidity: "",
+        C: ""
       }
     },
     created() {
@@ -75,7 +78,7 @@ export default {
     methods: {
       deleteData: function() {
         this.$store.dispatch('deleteWeatherData', this.b.id);
-        this.$router.push('/weathercards');
+        this.$navigateTo(Weathercards);
       },
       updateData: function() {
         console.log("test" + JSON.stringify(this.originalData));
@@ -85,6 +88,7 @@ export default {
         this.b.main.humidity = this.humidity;
         console.log("test2" + JSON.stringify(this.b));
         this.$store.dispatch('updateWeatherData', this.b)
+        this.$navigateTo(Weathercards);
       },
       resetData: function() {
           const endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${this.$props.LocationId}&units=metric&appid=83dec79fbb45d7ddc77f9657e7a41084`;
@@ -132,8 +136,15 @@ export default {
     },
     computed: {
     b: function(){
-      console.log(this.$store.getters.getLocationById(this.$props.LocationId));
-      return this.$store.getters.getLocationById(this.$props.LocationId);
+      try{
+        console.log(this.$store.getters.getLocationById(this.$props.LocationId));
+        this.C = this.$store.getters.getLocationById(this.$props.LocationId);
+        return this.$store.getters.getLocationById(this.$props.LocationId);
+      }
+      catch(err){
+        console.log("Error occured on editweathercard computed function b: " + err);
+      }
+      
     },
 
   },
