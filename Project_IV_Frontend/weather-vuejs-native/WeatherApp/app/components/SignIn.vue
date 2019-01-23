@@ -16,7 +16,7 @@
 
                 <FlexboxLayout alignItems="center" flexDirection="column" >
                     <Button text="Sign in" class="btn btn-primary btn-rounded-lg c-primary-button" width="100%" @tap="login()"></Button>
-                    <Label text="I do not have an account" class="label"></Label>
+                    <Label text="I do not have an account" class="label-link" @tap="SignUp()"></Label>
                 </FlexboxLayout>
             </StackLayout>
         </FlexboxLayout>
@@ -26,6 +26,7 @@
 <script>
 import Weathercards from '@/components/Weathercards';
 import Addlocation from '@/components/AddLocation';
+import SignUp from '@/components/SignUp';
 
   export default {
     name: 'Signin',
@@ -44,7 +45,10 @@ import Addlocation from '@/components/AddLocation';
         this.$store.dispatch('login', { username, password })
        .then(() => {this.$navigateTo(Weathercards); this.isActive=false;})
        .catch(err => {console.log(err); this.isActive=true;})
-      }
+      },
+       SignUp: function() {
+            this.$navigateTo(SignUp)
+        },
     },
     
   }

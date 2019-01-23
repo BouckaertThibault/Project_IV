@@ -25,6 +25,7 @@
                 </StackLayout>
 
                 <Button text="Sign up" class="btn btn-primary btn-rounded-lg c-primary-button"  height="50" @tap="register()"></Button>
+                <Label text="I already have an account" class="label-link" textAlignment="center" @tap="SignIn()"></Label>
             </StackLayout>
         </FlexboxLayout>
     </Page>
@@ -54,7 +55,10 @@ import SignIn from '@/components/SignIn';
           this.$store.dispatch('register', data)
         .then(() => {this.$navigateTo(SignIn); this.isActive=false;})
         .catch(err => {console.log(err); this.isActive=true;})
-        }
+        },
+        SignIn: function() {
+            this.$navigateTo(SignIn)
+        },
   }
   }
 </script>
