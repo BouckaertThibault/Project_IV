@@ -3,21 +3,22 @@
     <div class="c-header">
           <div class="c-header__locations">
               <h3>My Objects</h3> 
-              <p>3 working</p>
           </div>
           <router-link to="addlocation"><primary-button class="c-primary-button--weathercards">New object</primary-button></router-link>
       </div>
     <draggable v-model='savedLocation'>
       <weather-card  @click.native="editCard(l.name)" v-for="l in getLocations" :key="l.id" :woeid="l" />
     </draggable>
-    <app-footer></app-footer>
+    <div class="c-footer">
+      <img src="@/assets/House-activated-icon.png" alt="Logo" class="c-footer__profile">
+      <img src="@/assets/Account-icon.png" alt="Logo" @click="goToAccount" class="c-footer__home">
+    </div>
   </div>
 </template>
 
 <script>
   // import LocationHeader from "@/components/LocationHeader";
   import WeatherCard from "@/components/WeatherCard"
-  import AppFooter from "@/components/AppFooter";
   import draggable from 'vuedraggable'
   import PrimaryButton from "@/components/forms/PrimaryButton";
 
@@ -27,11 +28,13 @@
     components: {
       // LocationHeader,
       WeatherCard,
-      AppFooter,
       draggable,
       PrimaryButton
     },
     methods: {
+      goToAccount(){
+        this.$router.push('/Account')
+      },
       editCard: function (name) {
         this.$router.push({ name: 'editweathercard', params: { LocationId: name } })
       }
@@ -58,4 +61,5 @@
   @import './src/style/base';
   @import './src/style/components/components.container';
   @import './src/style/components/components.header';
+  @import './src/style/components/components.footer';
 </style>

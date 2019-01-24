@@ -1,5 +1,8 @@
 <template>
-  <div class="o-container-start">
+  <div class="o-container-center">
+    <div @click="goBack" class="c-arrow">
+          <img src="@/assets/Arrow-back.svg" alt="back">
+    </div>
       <form @submit.prevent="register" class="c-form">
           <h1>Sign Up</h1>
           <label class="c-form-label">Username</label>
@@ -10,9 +13,9 @@
           <input v-model="password" class="c-form-input" type="password" placeholder="Password" required>
           <label class="c-form-label">Confirm password</label>
           <input v-model="password_confirmation" class="c-form-input" type="password" placeholder="Password confirmation" required>
-          <span class="c-error" v-bind:class="{ active: isActive }">Something went wrong...</span>
           <primary-button class="signup-container-buttons" type="submit">Next step</primary-button>
-          <router-link to="login"><span class="c-span-swap">I already have an account</span></router-link>
+          <router-link to="signin" class="c-swap"><span>I already have an account</span></router-link>
+          <div v-if="loading" class="loader"></div>
       </form>
   </div>
 </template>
@@ -29,19 +32,23 @@
         email : "",
         password : "",
         password_confirmation : "",
-        isActive: false
+        loading: false
       }
     },
     methods: {
+      goBack(){
+        this.$router.go(-1);
+      },
         register: function () {
+          this.loading = true;
           let data = {
             username: this.username,
             email: this.email,
             password: this.password
           }
           this.$store.dispatch('register', data)
-        .then(() => {this.$router.push('/signin'); this.isActive=false;})
-        .catch(err => {console.log(err); this.isActive=true;})
+        .then(() => {this.loading = false; this.$router.push('/signin');})
+        .catch(err => {this.loading = false; console.log(err);})
         }
   },
     components: {
@@ -55,4 +62,5 @@
   @import './src/style/components/components.container';
   @import './src/style/components/components.signup';
   @import './src/style/elements/elements.forms';
+  @import './src/style/components/components.arrow';
 </style>

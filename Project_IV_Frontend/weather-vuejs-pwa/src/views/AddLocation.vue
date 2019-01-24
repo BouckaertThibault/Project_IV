@@ -6,11 +6,13 @@
     :accessToken="accessToken"
     :mapStyle.sync="mapStyle">
     <MglMarker :coordinates="coordinates" color="red" ></MglMarker>
+    <div @click="goBack" class="c-arrow">
+        <img src="@/assets/Arrow-back.svg" alt="back">
+      </div>
     </mgl-map>
     <form class="c-card" @submit.prevent="searchButton">
       <h1 class="c-card--title">Add Location</h1>
-      <input class="c-form-input c-card--input" type="text" :value="location" placeholder="Tap for a location"/>
-      <primary-button @click="searchButton">Add {{location}}</primary-button>
+      <primary-button @click="searchButton">{{buttonText}}</primary-button>
     </form>
   </div>
 </template>
@@ -37,11 +39,27 @@ export default {
       MglMarker,
       PrimaryButton
     },
+    computed: {
+      buttonText: function(){
+        if(this.location == ""){
+          return "Tap the map!"
+        }
+        else if(this.location == undefined){
+          return "Try another location"
+        }
+        else{
+          return `Add ${this.location}`
+        }
+      }
+    },
     methods:{
+      goBack(){
+        this.$router.go(-1);
+      },
     searchButton: function() {
       if(this.location == ""){
         //this.inputfield == "Vul een locatie in";
-        console.log('Vul een locatie in');
+        alert("Choose a location")
       }
       else{
          console.log('selected town: ' + this.location);
@@ -49,27 +67,6 @@ export default {
       }
      
     },
-    // searchLocation: function() {
-    //   console.log("this is location: " + this.location);
-    //   const endpoint = `https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text%3D%22${ this.location }%22&format=json`;
-
-    //   fetch(endpoint)
-    //     .then(response => response.json())
-    //     .then(data=>{
-    //       //this.addMarkerData(data.query.results.place);
-    //       let cityObj = null;
-    //       if(Array.isArray(data.query.results.place)){
-    //         cityObj = data.query.results.place[0];
-    //       }
-    //       else {
-    //         cityObj = data.query.results.place;
-    //       }
-    //       this.$store.dispatch('addWeatherLocation', cityObj);
-    //     })
-    //     .catch(err => {
-    //       console.error('An error occured: ', err);
-    //     })
-    // },
     searchLocation: function() {
 
       const endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${this.location}&units=metric&appid=83dec79fbb45d7ddc77f9657e7a41084`;
@@ -93,31 +90,31 @@ export default {
       console.log('Element, ', el);
       console.log('Event, ', e);
       this.coordinates = [e.lngLat.lng, e.lngLat.lat];
-      console.log('coordinates: ' + this.coordinates);
-      let test = this.$refs.map.queryRenderedFeatures(e.point,
-        {
-          radius: 10
-        }
-      );
-      console.log(test);
-      console.log(this.location);
-      if(test.length != 0){
-        if(test[0].sourceLayer == "place_label"){
-          console.log(test[0].properties.name);
-          this.location = test[0].properties.name;
-          console.log(this.location);
-        }
-        else{
-          console.log("Not a town");
-        }
-
-      }
-      else{
-        console.log("nothing found");
-      }
-
-      
-      //check of feature town is, ja: vraag om toe te voegen aan het weeroverzicht
+      var self = this;
+        
+            const endpoint = `https://api.opencagedata.com/geocode/v1/json?q=${e.lngLat.lat}+${e.lngLat.lng}&key=df386088e80840fc8452839031722474&language=en&pretty=1&no_annotations=1`;
+            
+            fetch(endpoint)
+                .then(response => response.json())
+                
+                .then(data=>{
+                    console.log('DATA: ' + JSON.stringify(data));
+                    if(data.results[0].components.city_district !== undefined){
+                        self.location = data.results[0].components.city_district;
+                    }
+                    else if(data.results[0].components.town !== undefined){
+                      self.location = data.results[0].components.town;
+                    }
+                    else{
+                      self.location = data.results[0].components.city;
+                    }
+                    
+                })
+               
+                .catch(err => {
+                    console.error('An error occured: ', err);
+                
+            });
     }
   }
 };
@@ -127,5 +124,6 @@ export default {
   @import './src/style/base';
   @import './src/style/components/components.map';
   @import './src/style/elements/elements.forms';
+  @import './src/style/components/components.arrow';
   @import './src/style/elements/elements.card';
 </style>

@@ -55,3 +55,28 @@
 .c-editweathercard--mini{
     padding-left: 10;
 }
+
+.c-editweathercard-stepper{
+    padding-left:10;
+}
+.c-editweathercard-stepperbutton{
+    border-width: 1;
+    border-color: #4cd964;
+    color: white;
+    background-color: #4cd964;
+}
+
+.c-editweathercard-stepperlabel{
+    border-width: 1;
+    border-color: #4cd964;
+    text-align: center;
+    padding-top:10;
+}
+
+.c-editweathercard-stepperbutton:highlighted{
+    background-color: #49bb5c;
+}
+
+.c-editweathercard-spacer{
+    margin-bottom: 10;
+}

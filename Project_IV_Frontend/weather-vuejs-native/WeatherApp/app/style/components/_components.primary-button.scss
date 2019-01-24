@@ -2,14 +2,22 @@
 
 
 .c-primary-button{
-    font-size: 12;
+    font-size: 15;
     font-weight: bold;
     text-transform: none;
 	height:50;
 }
 
+.c-primary-button:highlighted{
+    background-color: #49bb5c;
+}
+
 .c-primary-button-delete{
     background-color: #f92323;
+}
+
+.c-primary-button-delete:highlighted{
+    background-color: #e04444;
 }
 
 .c-button-spacer{

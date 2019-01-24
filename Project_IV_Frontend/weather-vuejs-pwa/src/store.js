@@ -43,12 +43,14 @@ export default new Vuex.Store({
     login({commit}, user){
       return new Promise((resolve, reject) => {
         commit('authRequest')
-        axios({url: 'https://projectivapi20190112011952.azurewebsites.net/api/Auth/token', data: user, method: 'POST' })
+        axios({url: 'https://projectivapi20190112011952.azurewebsites.net/api/Auth/login', data: user, method: 'POST' })
         .then(resp => {
           console.log(resp);
           const token = resp.data.token
           const user = resp.data.user
+          console.log("TRYING TO SAVE TOKEN: " + token)
           VueCookies.set('token', token , {expires: 1} )
+          console.log("TOKEN SAVE COMPLETE")
           // axios.defaults.headers.common['Authorization'] = token
           commit('authSuccess', token, user)
           commit('saveUsername', resp.data.userName)
@@ -56,6 +58,7 @@ export default new Vuex.Store({
         })
         .catch(err => {
           commit('authError')
+          alert("Username or password is wrong")
           VueCookies.remove('token')
           reject(err)
         })
@@ -66,15 +69,18 @@ export default new Vuex.Store({
       commit('authRequest')
       axios({url: 'https://projectivapi20190112011952.azurewebsites.net/api/Auth/register', data: user, method: 'POST' })
       .then(resp => {
-        const token = resp.data.token
-        const user = resp.data.user
-        VueCookies.set('token', token, "1d","/app")
-        // axios.defaults.headers.common['Authorization'] = token
-        commit('authSuccess', token, user)
-        resolve(resp)
+          const token = resp.data.token
+          const user = resp.data.user
+          VueCookies.set('token', token, "1d","/app")
+          // axios.defaults.headers.common['Authorization'] = token
+          commit('authSuccess', token, user)
+          resolve(resp)
+       
       })
       .catch(err => {
         commit('authError', err)
+        console.log(err);
+        alert("There was an error creating your account")
         VueCookies.remove('token')
         reject(err)
       })

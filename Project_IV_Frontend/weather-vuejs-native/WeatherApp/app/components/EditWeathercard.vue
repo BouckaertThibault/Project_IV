@@ -4,6 +4,9 @@
         <ScrollView scrollBarIndicatorVisible="false">
         <StackLayout>
           <GridLayout class="c-editweathercard" width="100%" height="200" columns="3*,*" rows="*,*,*">
+            <AbsoluteLayout>
+        <Image @tap="goBack"  src="~/assets/images/Arrow-back.png" width="12" height="20"></Image>
+        </AbsoluteLayout>
               <label row="0" col="0" class="c-editweathercard--title">{{C.name}}</label>
               <label row="1" col="0" class="c-editweathercard--country" >{{C.sys.country}}</label>
               <Image rowSpan="2" col="1" row="0" class="c-editweathercard--img"  src="~/assets/images/sunny-activated.png"
@@ -14,23 +17,32 @@
                   <Image width="16" height="16" class="c-editweathercard--rest"  src="~/assets/images/Neerslag.png" />
                   <Label width="70" height="20" class="c-editweathercard--rest c-editweathercard--mini" >{{C.main.humidity}}%</Label>
                   <Image width="16" height="16" class="c-editweathercard--rest"  src="~/assets/images/windsnelheid.png" />
-                  <Label width="70" height="20" class="c-editweathercard--rest c-editweathercard--mini" >{{C.wind.speed}} km/h</Label>
+                  <Label width="90" height="20" class="c-editweathercard--rest c-editweathercard--mini" >{{C.wind.speed}} km/h</Label>
               </StackLayout>
           </GridLayout>
           <StackLayout class="c-editweathercard--border">
-            <GridLayout height="80" rows="*,*" columns="*,*">
+            <GridLayout height="80" rows="*,*" columns="*,*" class="c-editweathercard-spacer">
               <Label class="c-editweathercard--leftlabel" row="0" col="0" width="100" height="30">Temperature</Label>
               <Label class="c-editweathercard--rightlabel" row="0" col="1" width="100" height="30" >{{temp}}°C</Label>
-              <Slider row="1" colSpan="2" value="80" v-model="temp" @change="changeTemp" minValue="-50" maxValue="50"/>
+              <StackLayout orientation="horizontal" row="1" colSpan="2" class="c-editweathercard-stepper">
+                    <Button text="-" @tap="tempDown" class="c-editweathercard-stepperbutton" width="22%" />
+                    <Label v-model="temp" class="c-editweathercard-stepperlabel" width="50%" />
+                    <Button text="+" @tap="tempUp" class="c-editweathercard-stepperbutton" width="22%" />
+              </StackLayout>
             </GridLayout>
-            <GridLayout height="80" rows="*,*" columns="*,*">
+            <GridLayout height="80" rows="*,*" columns="*,*" class="c-editweathercard-spacer">
               <Label class="c-editweathercard--leftlabel" row="0" col="0" width="100" height="30">Wind speed</Label>
               <Label class="c-editweathercard--rightlabel" row="0" col="1" width="100" height="30" >{{windSpeed}}km/h</Label>
-              <Slider row="1" colSpan="2" value="80" v-model="windSpeed" @change="changeWindSpeed" minValue="0" maxValue="200"/>
+              <StackLayout orientation="horizontal" row="1" colSpan="2" class="c-editweathercard-stepper">
+                    <Button text="-" @tap="windDown" class="c-editweathercard-stepperbutton" width="22%" />
+                    <Label v-model="windSpeed" class="c-editweathercard-stepperlabel" width="50%" />
+                    <Button text="+" @tap="windUp" class="c-editweathercard-stepperbutton" width="22%" />
+              </StackLayout>
             </GridLayout>
             <GridLayout height="80" rows="*,*" columns="*,*">
               <Label class="c-editweathercard--leftlabel" row="0" col="0" width="150" height="30">Direction of the wind</Label>
-              <Slider row="1" colSpan="2" value="80" />
+              <Label class="c-editweathercard--rightlabel" row="0" col="1" width="100" height="30">{{windDirection}}°</Label>
+              <Slider row="1" colSpan="2" minValue="0" maxValue="360" value="80" v-model="windDirection" @change="changeDirection"/>
             </GridLayout>
             <GridLayout height="80" rows="*,*" columns="*,*">
               <Label class="c-editweathercard--leftlabel" row="0" col="0" width="100" height="30">Cloudiness</Label>
@@ -60,7 +72,7 @@ export default {
   data(){
       return {
         originalData: "",
-        temp:  "",
+        temp: "",
         windSpeed: "",
         windDirection: "",
         cloud: "",
@@ -70,12 +82,16 @@ export default {
     },
     created() {
       this.originalData = this.b;
-      this.temp = this.b.main.temp;
-      this.windSpeed = this.b.wind.speed;
-      this.cloud = this.b.clouds.all;
-      this.humidity = this.b.main.humidity;
+      this.temp = Math.round(this.b.main.temp);
+      this.windSpeed = Math.round(this.b.wind.speed);
+      this.windDirection = Math.round(this.b.wind.deg);
+      this.cloud = Math.round(this.b.clouds.all);
+      this.humidity = Math.round(this.b.main.humidity);
     },
     methods: {
+      goBack(){
+        this.$navigateBack()
+      },
       deleteData: function() {
         this.$store.dispatch('deleteWeatherData', this.b.id);
         this.$navigateTo(Weathercards);
@@ -84,6 +100,7 @@ export default {
         console.log("test" + JSON.stringify(this.originalData));
         this.b.main.temp = this.temp;
         this.b.wind.speed = this.windSpeed;
+        this.b.wind.deg = this.windDirection;
         this.b.clouds.all = this.cloud;
         this.b.main.humidity = this.humidity;
         console.log("test2" + JSON.stringify(this.b));
@@ -98,12 +115,14 @@ export default {
               
               .then(data=>{
                 console.log('DATA: ' + data);
-                this.temp = data.main.temp;
-                this.windSpeed = data.wind.speed;
-                this.cloud = data.clouds.all;
-                this.humidity = data.main.humidity;
-                this.b.main.temp = data.main.temp;;
+                this.temp = Math.round(data.main.temp);
+                this.windSpeed = Math.round(data.wind.speed);
+                this.windDirection = Math.round(data.wind.deg);
+                this.cloud = Math.round(data.clouds.all);
+                this.humidity = Math.round(data.main.humidity);
+                this.b.main.temp = data.main.temp;
                 this.b.wind.speed = data.wind.speed;
+                this.b.wind.deg = data.wind.deg;
                 this.b.clouds.all = data.clouds.all;
                 this.b.main.humidity = data.main.humidity;
                 this.$store.dispatch('updateWeatherData', data)
@@ -112,14 +131,6 @@ export default {
                 console.error('An error occured: ', err);
               })
 
-      },
-      changeTemp(event) {
-        console.log("temp change: " + event);
-        this.temp = event;
-      },
-      changeWindSpeed(event) {
-        console.log("windspeed change: " + event);
-        this.windSpeed = event;
       },
       changeDirection(event) {
         console.log("direction change: " + event);
@@ -132,6 +143,18 @@ export default {
       changeHumidity(event) {
         console.log("humidity change: " + event.target.value);
         this.humidity = event.target.value;
+      },
+      tempDown(){
+        this.temp = Math.round(this.temp) - 1;
+      },
+      tempUp(){
+        this.temp = Math.round(this.temp) + 1
+      },
+      windDown(){
+        this.windSpeed = Math.round(this.windSpeed) - 1;
+      },
+      windUp(){
+        this.windSpeed = Math.round(this.windSpeed) + 1
       }
     },
     computed: {
@@ -154,6 +177,7 @@ export default {
 <style scoped lang="scss">
   @import './app/style/components/components.primary-button'; 
   @import './app/style/components/components.editweathercard';
+  @import './app/style/components/components.arrowback';
   @import './app/style/elements/elements.labels';
   @import './app/style/elements/elements.page';
 </style>

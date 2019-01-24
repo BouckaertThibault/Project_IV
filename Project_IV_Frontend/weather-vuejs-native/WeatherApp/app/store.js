@@ -42,7 +42,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         appSettings.remove("token")
         commit('authRequest')
-        axios({url: 'https://projectivapi20190112011952.azurewebsites.net/api/Auth/token', data: user, method: 'POST' })
+        axios({url: 'https://projectivapi20190112011952.azurewebsites.net/api/Auth/login', data: user, method: 'POST' })
         .then(resp => {
           console.log(resp);
           const token = resp.data.token

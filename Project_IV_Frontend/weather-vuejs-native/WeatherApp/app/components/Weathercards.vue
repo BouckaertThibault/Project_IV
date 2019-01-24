@@ -16,7 +16,9 @@
               </GridLayout>
           </TabViewItem>
           <TabViewItem :iconSource="accountImg">
-            <Label text="Content for Tab 2" />
+            <StackLayout class="c-weathercards--border--account">
+              <Button class="btn btn-primary btn-rounded-lg c-primary-button c-button-spacer c-primary-button-delete" width="100%" @tap="logout">Logout</Button>
+            </StackLayout>
           </TabViewItem>
         </TabView>
          
@@ -27,6 +29,7 @@
   import Weathercard from "@/components/Weathercard"
   import AddLocation from "@/components/AddLocation"
   import EditWeathercard from "@/components/EditWeathercard"
+  import Splash from "@/components/Splash"
 
   export default {
     name: 'Weathercards',
@@ -39,18 +42,6 @@
     },
     components: {
       Weathercard,
-    },
-    beforeCreate(){
-      console.log("WEATHERCARDS BEFORECREATED!!!!");
-    },
-    created(){
-      console.log("WEATHERCARDS CREATED!!!!");
-    },
-    mounted(){
-      console.log("WEATHERCARDS MOUNTED!!!");
-    },
-    updated(){
-      console.log("WEATHERCARDS UPDATED!!!");
     },
     methods: {
     onTabChange(args) {
@@ -65,6 +56,22 @@
         this.accountImg = "~/assets/images/accountactivated.png"; 
       }
       this.tab1activated = !this.tab1activated;
+    },
+    logout(){
+      confirm({
+        title: "Logout",
+        message: "Are you sure you want to log out?",
+        okButtonText: "YES",
+        cancelButtonText: "NO"
+      }).then(result => {
+        if(result == true){
+          this.$store.dispatch('logout');
+          this.$navigateTo(Splash);
+        }
+        else{
+          console.log("cancelled logout")
+        }
+      });
     },
     AddLocation: function() {
      this.$navigateTo(AddLocation)

@@ -33,7 +33,7 @@
 }
 
 .c-weather-card-img--image{
-    width: 70px;
+    width: 75px;
     height: 51px;
 }
 
@@ -75,7 +75,7 @@
 
 .c-weather-card-info__rain-img{
     margin-bottom: -10px;
-    margin-left: 40px;
+    margin-left: 30px;
 }
 
 
@@ -83,16 +83,19 @@
     font-size: 15px;
     margin-bottom: 0px;
     margin-left: 8px;
+    font-weight: normal;
 }
 
 .c-weather-card-info__wind-img{
     margin-bottom: -10px;
-    margin-left: 40px;
+    margin-left: 30px;
 }
 
 .c-weather-card-info__wind{
     font-size: 15px;
     margin-bottom: 0px;
     margin-left: 8px;
+    font-weight: normal;
 }
+
 

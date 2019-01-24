@@ -1,6 +1,9 @@
 <template>
   <div >
     <div class="c-weather-card">
+      <div @click="goBack" class="c-arrow">
+        <img src="@/assets/Arrow-back.svg" alt="back">
+      </div>
         <div class="c-weather-card-info">
           <div class="c-weather-card-text">
             <p class="c-weather-card-info__location">{{b.name}}</p>
@@ -86,6 +89,9 @@
       this.humidity = this.b.main.humidity;
     },
     methods: {
+      goBack(){
+        this.$router.go(-1);
+      },
       deleteData: function() {
         this.$store.dispatch('deleteWeatherData', this.b.id);
         this.$router.push('/weathercards');
@@ -158,5 +164,6 @@
 <style scoped lang="scss">
   @import './src/style/base';
   @import './src/style/components/components.container';
+  @import './src/style/components/components.arrow';
   @import './src/style/components/components.edit-weather-card';
 </style>

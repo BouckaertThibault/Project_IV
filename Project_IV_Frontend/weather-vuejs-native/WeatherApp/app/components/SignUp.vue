@@ -2,6 +2,7 @@
     <Page actionBarHidden="true">
         <ActionBar title="My App"/>
         <FlexboxLayout class="page" alignItems="center">
+            <Image @tap="goBack" alignSelf="flex-start" class="arrow-back" src="~/assets/images/Arrow-back.png" width="24" height="40"></Image>
             <StackLayout class="form">
                 <label text="Sign up" class="label-title"/>
                 <StackLayout class="input-field">
@@ -26,7 +27,7 @@
 
                 <Button text="Sign up" class="btn btn-primary btn-rounded-lg c-primary-button"  height="50" @tap="register()"></Button>
                 <Label text="I already have an account" class="label-link" textAlignment="center" @tap="SignIn()"></Label>
-                <ActivityIndicator :busy="loading" height="70" width="70" marginTop="20"/>
+                <ActivityIndicator :busy="loading" height="70" width="70" marginTop="30"/>
             </StackLayout>
         </FlexboxLayout>
     </Page>
@@ -47,6 +48,9 @@ import SignIn from '@/components/SignIn';
       }
     },
     methods: {
+         goBack(){
+          this.$navigateBack()
+      },
         register: function () {
             if(this.username == "" || this.email == "" || this.password == "" || this.password_confirmation == ""){
              alert({title: "Error",
@@ -86,6 +90,7 @@ import SignIn from '@/components/SignIn';
 //   @import './app/style/base';
   @import './app/style/components/components.signin';
   @import './app/style/components/components.primary-button';
+  @import './app/style/components/components.arrowback';
   @import './app/style/elements/elements.inputfield';
   @import './app/style/elements/elements.labels';
   @import './app/style/elements/elements.page';
