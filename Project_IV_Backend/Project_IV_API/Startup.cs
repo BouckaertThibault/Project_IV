@@ -103,9 +103,9 @@ namespace Project_IV_Backend
                 cfg.AddPolicy("projectPolicy", builder =>
                 {
                     builder
+                     .AllowAnyOrigin()
                      .AllowAnyMethod()
                      .AllowAnyHeader()
-                     .WithOrigins("http://localhost:8080")
                      .AllowCredentials();
                 });
             });

@@ -35,8 +35,8 @@
     name: 'Weathercards',
     data(){
       return {
-        houseImg: "~/assets/images/houseactivated.png",
-        accountImg: "~/assets/images/account.png",
+        houseImg: "~/assets/images/ios/houseactivated.png",
+        accountImg: "~/assets/images/ios/account.png",
         tab1activated: true
       }
     },
@@ -47,13 +47,13 @@
     onTabChange(args) {
       if(this.tab1activated == true){
         console.log("house activated")
-        this.houseImg = "~/assets/images/houseactivated.png";
-        this.accountImg = "~/assets/images/account.png";
+        this.houseImg = "~/assets/images/ios/houseactivated.png";
+        this.accountImg = "~/assets/images/ios/account.png";
       }
       else{
         console.log("account activated")
-        this.houseImg = "~/assets/images/house.png";
-        this.accountImg = "~/assets/images/accountactivated.png"; 
+        this.houseImg = "~/assets/images/ios/house.png";
+        this.accountImg = "~/assets/images/ios/accountactivated.png"; 
       }
       this.tab1activated = !this.tab1activated;
     },
@@ -61,8 +61,8 @@
       confirm({
         title: "Logout",
         message: "Are you sure you want to log out?",
-        okButtonText: "YES",
-        cancelButtonText: "NO"
+        okButtonText: "Yes",
+        cancelButtonText: "No"
       }).then(result => {
         if(result == true){
           this.$store.dispatch('logout');

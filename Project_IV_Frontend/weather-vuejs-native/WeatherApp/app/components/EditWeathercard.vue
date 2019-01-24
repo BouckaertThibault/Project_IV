@@ -134,15 +134,15 @@ export default {
       },
       changeDirection(event) {
         console.log("direction change: " + event);
-        this.windDirection = event;
+        this.windDirection = Math.round(event);
       },
       changeCloud(event) {
         console.log("cloud change: " + event.target.value);
-        this.cloud = event.target.value;
+        this.cloud = Math.round(event.target.value);
       },
       changeHumidity(event) {
         console.log("humidity change: " + event.target.value);
-        this.humidity = event.target.value;
+        this.humidity = Math.round(event.target.value);
       },
       tempDown(){
         this.temp = Math.round(this.temp) - 1;

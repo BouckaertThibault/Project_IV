@@ -20,7 +20,7 @@
             @mapReady="onMapReady($event)">
         </Mapbox>
         <AbsoluteLayout>
-        <Image @tap="goBack" row="0" class="arrow-back arrow-back-map" src="~/assets/images/Arrow-back.png" width="12" height="20"></Image>
+        <Image @tap="goBack"  class="arrow-back arrow-back-map" src="~/assets/images/Arrow-back.png" width="12" height="20"></Image>
         </AbsoluteLayout>
         <FlexboxLayout row="1" width="100%" height="160" backgroundColor="white" alignItem="center" flexDirection="column" justifyContent="space-around">
             <label class="c-card--item c-card--title">Add Location</label>
