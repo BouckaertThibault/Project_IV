@@ -15,9 +15,10 @@
                 </StackLayout>
 
                 <FlexboxLayout alignItems="center" flexDirection="column" >
-                    <Button text="Sign in" class="btn btn-primary btn-rounded-lg c-primary-button" width="100%" @tap="login()"></Button>
+                    <Button text="Sign in" class="btn btn-primary btn-rounded-lg c-primary-button" width="100%" height="50" @tap="login()"></Button>
                     <Label text="I do not have an account" class="label-link" @tap="SignUp()"></Label>
                 </FlexboxLayout>
+                <ActivityIndicator :busy="loading" height="70" width="70" marginTop="20"/>
             </StackLayout>
         </FlexboxLayout>
     </Page>
@@ -32,19 +33,31 @@ import SignUp from '@/components/SignUp';
     name: 'Signin',
     data(){
       return {
-        isActive: false,
         username : "",
-        password : ""
+        password : "",
+        loading: false,
       }
     },
     methods: {
       login: function () {
-        this.isBusy = false;
-        let username = this.username 
-        let password = this.password
-        this.$store.dispatch('login', { username, password })
-       .then(() => {this.$navigateTo(Weathercards); this.isActive=false;})
-       .catch(err => {console.log(err); this.isActive=true;})
+          if(this.username == "" || this.password == ""){
+             alert({title: "Error",
+                    message: "Username or password can't be empty",
+                    okButtonText: "OK"
+                })
+        }
+        else{
+            this.loading = true;
+            let username = this.username 
+            let password = this.password
+            this.$store.dispatch('login', { username, password })
+        .then(() => {this.loading = false; this.$navigateTo(Weathercards); })
+        .catch(err => {
+            console.log("ERROR HIERZO: " + err); 
+            this.loading = false; 
+            })
+        }
+        
       },
        SignUp: function() {
             this.$navigateTo(SignUp)

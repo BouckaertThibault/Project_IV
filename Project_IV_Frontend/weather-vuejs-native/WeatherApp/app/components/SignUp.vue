@@ -26,6 +26,7 @@
 
                 <Button text="Sign up" class="btn btn-primary btn-rounded-lg c-primary-button"  height="50" @tap="register()"></Button>
                 <Label text="I already have an account" class="label-link" textAlignment="center" @tap="SignIn()"></Label>
+                <ActivityIndicator :busy="loading" height="70" width="70" marginTop="20"/>
             </StackLayout>
         </FlexboxLayout>
     </Page>
@@ -42,19 +43,37 @@ import SignIn from '@/components/SignIn';
         email : "",
         password : "",
         password_confirmation : "",
-        isActive: false
+        loading: false,
       }
     },
     methods: {
         register: function () {
+            if(this.username == "" || this.email == "" || this.password == "" || this.password_confirmation == ""){
+             alert({title: "Error",
+                    message: "Username or password or email can't be empty",
+                    okButtonText: "OK"
+                })
+        }
+        else if(this.password !== this.password_confirmation){
+            alert({title: "Error",
+                    message: "Passwords don't match",
+                    okButtonText: "OK"
+                })
+        }
+        else{
+          this.loading = true;
           let data = {
             username: this.username,
             email: this.email,
             password: this.password
           }
           this.$store.dispatch('register', data)
-        .then(() => {this.$navigateTo(SignIn); this.isActive=false;})
-        .catch(err => {console.log(err); this.isActive=true;})
+        .then(() => {this.loading = false; this.$navigateTo(SignIn); })
+        .catch(err => {
+            console.log(err); 
+            this.loading = false; 
+        })
+        }
         },
         SignIn: function() {
             this.$navigateTo(SignIn)

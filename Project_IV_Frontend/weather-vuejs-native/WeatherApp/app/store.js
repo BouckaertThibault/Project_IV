@@ -40,6 +40,7 @@ export default new Vuex.Store({
     },
     login({commit}, user){
       return new Promise((resolve, reject) => {
+        appSettings.remove("token")
         commit('authRequest')
         axios({url: 'https://projectivapi20190112011952.azurewebsites.net/api/Auth/token', data: user, method: 'POST' })
         .then(resp => {
@@ -57,6 +58,10 @@ export default new Vuex.Store({
         .catch(err => {
           commit('authError')
           console.log(err)
+          alert({title: "Error",
+                    message: "Username or password is wrong",
+                    okButtonText: "OK"
+                })
           appSettings.remove("token")
           reject(err)
         })
@@ -76,7 +81,10 @@ export default new Vuex.Store({
       })
       .catch(err => {
         commit('authError', err)
-        
+        alert({title: "Error",
+                    message: "There was an error creating your account",
+                    okButtonText: "OK"
+                })
         reject(err)
       })
     })

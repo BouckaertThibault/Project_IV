@@ -4,15 +4,15 @@
          <GridLayout rows="*, 200" width="100%" height="100%">
         <Mapbox 
         ref="map"
-        @tap="addNewLocation($el ,$event)"
         width="100%" 
         height="100%"
             :accessToken="accessToken"
             :mapStyle="mapStyle"
-            
+            latitude="50.827969"
+            longitude="3.264930"
             hideCompass="true"
             zoomLevel="12"
-            showUserLocation="false"
+            showUserLocation="true"
             disableZoom="false"
             disableRotation="false"
             disableScroll="false"
