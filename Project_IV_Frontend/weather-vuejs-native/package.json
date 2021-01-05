@@ -14,7 +14,7 @@
     }
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "nativescript-mapbox": "^4.4.1",
     "nativescript-socket.io": "^0.9.0",
     "nativescript-theme-core": "^1.0.4",
